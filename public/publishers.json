@@ -1,0 +1,46 @@
+{
+  "publishers": [
+    {
+      "name": "TechNews",
+      "description": "Bringing you the latest in technology news.",
+      "website": "https://technews.example.com",
+      "tags": ["technology", "gadgets", "innovation"]
+    },
+    {
+      "name": "Health Gazette",
+      "description": "Your source for health-related news and updates.",
+      "website": "https://healthgazette.example.com",
+      "tags": ["health", "wellness", "medical"]
+    },
+    {
+      "name": "Business Insight",
+      "description": "In-depth coverage of business and finance news.",
+      "website": "https://businessinsight.example.com",
+      "tags": ["business", "finance", "economy"]
+    },
+    {
+      "name": "Science Spectrum",
+      "description": "Exploring the wonders of science and discovery.",
+      "website": "https://sciencespectrum.example.com",
+      "tags": ["science", "discovery", "research"]
+    },
+    {
+      "name": "Entertainment Express",
+      "description": "Your ticket to the latest in entertainment news.",
+      "website": "https://entertainmentexpress.example.com",
+      "tags": ["entertainment", "celebrities", "movies"]
+    },
+    {
+      "name": "Sports Chronicle",
+      "description": "Covering the world of sports and athletic achievements.",
+      "website": "https://sportschronicle.example.com",
+      "tags": ["sports", "athletics", "competitions"]
+    },
+    {
+      "name": "Fashion Focus",
+      "description": "Setting trends in the world of fashion.",
+      "website": "https://fashionfocus.example.com",
+      "tags": ["fashion", "style", "trends"]
+    }
+  ]
+}
