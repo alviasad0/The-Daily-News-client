@@ -38,7 +38,11 @@ const TrendingsArticles = () => {
         {trendingsArticles.map((article) => (
           <SwiperSlide key={article._id}>
             <div>
-              <div className="card  bg-green-100 ">
+              <div
+                className={
+                  article.premium ? `bg-red-100 card` : `card bg-green-100`
+                }
+              >
                 <figure className=" h-[350px] w-full">
                   <img
                     src={article.image}

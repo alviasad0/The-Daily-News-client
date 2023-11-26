@@ -6,7 +6,8 @@ const Subscription = () => {
         <Helmet>
           <title>The Daily News | Subscriptions</title>
         </Helmet>
-        <h1> this is the Subscription section</h1>
+        <img src="https://i.ibb.co/HVQ91PM/4953844.jpg" alt="" />
+        <h1 className="text-center text-black font-bold   ">special offer is Going on</h1>
       </div>
     );
 };

@@ -1,13 +1,14 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 
 const ArticlesDetails = () => {
-    const article = useLoaderData()
+    const initialArticle = useLoaderData();
     const {user} = useContext(AuthContext)
+    const [article, setArticle] = useState(initialArticle);
     console.log(article, user);
-    
+    const isMounted = useRef(true);
 
     useEffect(() => {
 
@@ -26,21 +27,34 @@ const ArticlesDetails = () => {
             );
 
             if (!response.ok) {
-              
               console.error("Failed to update view count");
+            } else {
+            
+              setArticle((prevArticle) => ({
+                ...prevArticle,
+                totalViews: prevArticle.totalViews + 1,
+              }));
             }
           } catch (error) {
             console.error("Error updating view count", error);
           }
         };
 
-        updateViewCount();
+        if (isMounted.current) {
+         
+          updateViewCount();
+          isMounted.current = false;
+        }
     }, [article._id]);
     return (
       <div>
         <h1>this is the article details page </h1>
-        <div >
-          <div className="card  bg-green-100 ">
+        <div>
+          <div
+            className={
+              article.premium ? `bg-red-100 card` : `card bg-green-100`
+            }
+          >
             <figure className=" h-[350px] w-full">
               <img src={article.image} className="w-full h-full" alt="Shoes" />
             </figure>
@@ -65,9 +79,7 @@ const ArticlesDetails = () => {
 
               <div className="card-actions justify-end">
                 <button className="btn btn-success tracking-widest  font-bold uppercase">
-                  <Link to={`/articlesDetails/${article._id}`}>
-                    book now
-                  </Link>
+                  <Link to={`/articlesDetails/${article._id}`}>book now</Link>
                 </button>
               </div>
             </div>
