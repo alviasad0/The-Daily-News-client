@@ -12,6 +12,7 @@ import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import MyProfile from './../Pages/MyProfile/MyProfile';
+import ArticlesDetails from './../Pages/ArticlesDetails/ArticlesDetails';
 
 export const router = createBrowserRouter([
   {
@@ -31,10 +32,10 @@ export const router = createBrowserRouter([
         path: "register",
         element: <Register></Register>,
       },
-    //   {
-    //     path: "addArticles",
-    //     element: <AddArticles></AddArticles>,
-    //   },
+      //   {
+      //     path: "addArticles",
+      //     element: <AddArticles></AddArticles>,
+      //   },
       {
         path: "allArticles",
         element: <AllArticles></AllArticles>,
@@ -58,6 +59,12 @@ export const router = createBrowserRouter([
       {
         path: "myProfile",
         element: <MyProfile></MyProfile>,
+      },
+      {
+        path: `/articlesDetails/:_id`,
+        element: <ArticlesDetails></ArticlesDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allArticles/${params._id}`),
       },
     ],
   },

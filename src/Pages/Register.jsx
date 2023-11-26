@@ -8,12 +8,14 @@ import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 
 import auth from "../Firebase/firebase.config";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../Hooks/UseAxiosPublic";
 
 const Register = () => {
   const navigate = useNavigate();
   const { createUser, setUserName, setProfilePicture } =
     useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
+  const axiosPublic = useAxiosPublic();
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -51,10 +53,24 @@ const Register = () => {
       .then((result) => {
         setUserName(name);
         setProfilePicture(userPic);
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: "You have registered successfully!",
+        const userInfo = {
+          name: name,
+          email: email,
+        };
+        console.log(userInfo);
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            console.log("user added to the database");
+
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "User created successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          }
         });
         console.log(result.user);
       })
@@ -66,19 +82,30 @@ const Register = () => {
         });
         console.log(error.message);
       });
-    console.log(name, userPic, email, password, confirmPassword);
+    // console.log(name, userPic, email, password, confirmPassword);
   };
 
   /* google log in  */
   const handleGoogleLogin = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: "You have registered successfully!",
-        });
-        navigate(location?.state ? location.state : "/");
+
+       const userInfo = {
+         email: result.user?.email,
+         name: result.user?.displayName,
+       };
+       axiosPublic.post("/users", userInfo).then((res) => {
+         console.log(res.data);
+         Swal.fire({
+           icon: "success",
+           title: "Success!",
+           text: "You have registered successfully!",
+         });
+         navigate(location?.state ? location.state : "/");
+       });
+
+
+        
         console.log(result.user);
       })
       .catch((error) => {

@@ -1,8 +1,7 @@
-{
-  "articles": [
+[
     {
       "title": "The Latest Tech Innovations",
-      "image": "https://ibb.co/Y2jRT9j",
+      "image": "https://i.ibb.co/ZdTL1sT/1.jpg",
       "publisher": "TechNews",
       "tags": ["technology", "gadgets", "innovation"],
       "description": "Explore the groundbreaking innovations in the world of technology. From the latest gadgets to futuristic advancements, stay informed about the tech landscape.",
@@ -10,7 +9,7 @@
     },
     {
       "title": "Top Health Tips for a Healthy Lifestyle",
-      "image": "https://ibb.co/Jdbxx7N",
+      "image": "https://i.ibb.co/vBrssPb/2.jpg",
       "publisher": "Health Gazette",
       "tags": ["health", "wellness", "medical"],
       "description": "Discover practical health tips for maintaining a healthy lifestyle. From nutrition advice to exercise routines, take steps towards a healthier you.",
@@ -18,7 +17,7 @@
     },
     {
       "title": "Business Trends Shaping the Future",
-      "image": "https://ibb.co/FJ4xVQX",
+      "image": "https://i.ibb.co/L6dk5Tr/3.jpg",
       "publisher": "Business Insight",
       "tags": ["business", "finance", "economy"],
       "description": "Stay ahead in the business world with insights into the latest trends, financial strategies, and economic developments that are shaping the future.",
@@ -26,7 +25,7 @@
     },
     {
       "title": "Exploring Scientific Discoveries",
-      "image": "https://ibb.co/WnBgFdd",
+      "image": "https://i.ibb.co/G7Cck11/4.jpg",
       "publisher": "Science Spectrum",
       "tags": ["science", "discovery", "research"],
       "description": "Dive into the fascinating world of scientific discoveries and breakthrough research. Learn about the latest advancements in various scientific fields.",
@@ -34,7 +33,7 @@
     },
     {
       "title": "Entertainment News Roundup",
-      "image": "https://ibb.co/fFrBWxT",
+      "image": "https://i.ibb.co/H4G1yH9/5-1.jpg",
       "publisher": "Entertainment Express",
       "tags": ["entertainment", "celebrities", "movies"],
       "description": "Get the latest scoop on entertainment news, celebrity updates, and movie reviews. Stay entertained with the buzz from the world of showbiz.",
@@ -42,7 +41,7 @@
     },
     {
       "title": "Sports Highlights of the Month",
-      "image": "https://ibb.co/0tgV8ST",
+      "image": "https://i.ibb.co/3zDYGq2/6.jpg",
       "publisher": "Sports Chronicle",
       "tags": ["sports", "athletics", "competitions"],
       "description": "Catch up on the thrilling sports highlights and achievements from around the globe. Stay updated on your favorite athletes and sports events.",
@@ -50,7 +49,7 @@
     },
     {
       "title": "Fashion Trends to Follow This Season",
-      "image": "https://ibb.co/8skTGJw",
+      "image": "https://i.ibb.co/1QchB3N/7.jpg",
       "publisher": "Fashion Focus",
       "tags": ["fashion", "style", "trends"],
       "description": "Stay in vogue with the latest fashion trends and style inspirations. Explore the hottest looks for the season and elevate your fashion game.",
@@ -58,63 +57,63 @@
     },
     {
       "title": "Exploring Culinary Delights",
-      "image": "https://ibb.co/4m8zqNG",
-      "publisher": "Foodie's Paradise",
+      "image": "https://i.ibb.co/vw3pFzG/8.jpg",
+      "publisher": "Fashion Focus",
       "tags": ["food", "culinary", "recipes"],
       "description": "Indulge in the world of culinary delights with mouth-watering recipes and food adventures. Discover the art of cooking and savor delicious flavors.",
       "totalViews": 2544
     },
     {
       "title": "Travel Escapades: Unexplored Destinations",
-      "image": "https://ibb.co/vPjRF8z",
-      "publisher": "Wanderlust Chronicles",
+      "image": "https://i.ibb.co/zR4DMwf/9.jpg",
+      "publisher": "Entertainment Express",
       "tags": ["travel", "adventure", "destinations"],
       "description": "Embark on a journey to unexplored destinations. Experience the thrill of adventure and discover hidden gems around the world with travel escapades.",
       "totalViews": 1605
     },
     {
       "title": "Educational Insights: Learning Beyond the Classroom",
-      "image": "https://ibb.co/Xz8fjQ4",
-      "publisher": "LearnSmart",
+      "image": "https://i.ibb.co/196Y7gn/10.jpg",
+      "publisher": "TechNews",
       "tags": ["education", "learning", "knowledge"],
       "description": "Unlock educational insights and delve into learning beyond the classroom. Stay informed about innovative teaching methods, knowledge-sharing, and intellectual pursuits.",
       "totalViews": 904
     },
     {
       "title": "Artistry Unveiled: Creative Expressions",
-      "image": "https://ibb.co/QcB2m6C",
-      "publisher": "Creative Canvas",
+      "image": "https://i.ibb.co/6Zh3s41/11.jpg",
+      "publisher": "Science Spectrum",
       "tags": ["art", "creativity", "expression"],
       "description": "Dive into the world of artistry and unveil creative expressions. Explore diverse forms of art, from paintings to sculptures, and appreciate the beauty of human creativity.",
       "totalViews": 1240
     },
     {
       "title": "Green Living: Sustainable Lifestyles",
-      "image": "https://ibb.co/tPnV9J9",
-      "publisher": "EcoLiving",
+      "image": "https://i.ibb.co/FqcRFDF/12.jpg",
+      "publisher": "Fashion Focus",
       "tags": ["environment", "sustainability", "green living"],
       "description": "Embrace sustainable lifestyles and explore the principles of green living. Learn about eco-friendly practices, environmental conservation, and the impact of individual choices.",
       "totalViews": 1870
     },
     {
       "title": "Mindfulness Practices for Everyday Wellbeing",
-      "image": "https://ibb.co/1ZNrfpw",
-      "publisher": "Mindful Living",
+      "image": "https://i.ibb.co/VVGgWhP/13.jpg",
+      "publisher": "Business Insight",
       "tags": ["mindfulness", "wellbeing", "mental health"],
       "description": "Incorporate mindfulness practices into your daily routine for improved wellbeing and mental health. Discover the art of living in the present moment.",
       "totalViews": 1508
     },
     {
       "title": "Bookworm's Haven: Literary Adventures",
-      "image": "https://ibb.co/8m6jKVQ",
-      "publisher": "Bookish Bliss",
+      "image": "https://i.ibb.co/nwzDgSK/14.jpg",
+      "publisher": "Entertainment Express",
       "tags": ["books", "literature", "reading"],
       "description": "Immerse yourself in literary adventures with Bookworm's Haven. Explore book reviews, reading recommendations, and the enchanting world of literature.",
       "totalViews": 2004
     },
     {
       "title": "The Latest Tech Innovations",
-      "image": "https://ibb.co/jDkSHNy",
+      "image": "https://i.ibb.co/Zxz0NjB/15.jpg",
       "publisher": "TechNews",
       "tags": ["technology", "gadgets", "innovation"],
       "description": "Explore the groundbreaking innovations in the world of technology. From the latest gadgets to futuristic advancements, stay informed about the tech landscape.",
@@ -122,7 +121,7 @@
     },
     {
       "title": "Top Health Tips for a Healthy Lifestyle",
-      "image": "https://ibb.co/GVsh38m",
+      "image": "https://i.ibb.co/NL14nJR/16.jpg",
       "publisher": "Health Gazette",
       "tags": ["health", "wellness", "medical"],
       "description": "Discover practical health tips for maintaining a healthy lifestyle. From nutrition advice to exercise routines, take steps towards a healthier you.",
@@ -130,7 +129,7 @@
     },
     {
       "title": "Business Trends Shaping the Future",
-      "image": "https://ibb.co/mJCTSnk",
+      "image": "https://i.ibb.co/2q7h5zx/17.jpg",
       "publisher": "Business Insight",
       "tags": ["business", "finance", "economy"],
       "description": "Stay ahead in the business world with insights into the latest trends, financial strategies, and economic developments that are shaping the future.",
@@ -138,7 +137,7 @@
     },
     {
       "title": "Exploring Scientific Discoveries",
-      "image": "https://ibb.co/qBpCC5B",
+      "image": "https://i.ibb.co/Mn7ff6n/18.jpg",
       "publisher": "Science Spectrum",
       "tags": ["science", "discovery", "research"],
       "description": "Dive into the fascinating world of scientific discoveries and breakthrough research. Learn about the latest advancements in various scientific fields.",
@@ -146,7 +145,7 @@
     },
     {
       "title": "Entertainment News Roundup",
-      "image": "https://ibb.co/Tvrp3B2",
+      "image": "https://i.ibb.co/YRbYs7Q/19.jpg",
       "publisher": "Entertainment Express",
       "tags": ["entertainment", "celebrities", "movies"],
       "description": "Get the latest scoop on entertainment news, celebrity updates, and movie reviews. Stay entertained with the buzz from the world of showbiz.",
@@ -154,7 +153,7 @@
     },
     {
       "title": "Sports Highlights of the Month",
-      "image": "https://ibb.co/8zMJN5J",
+      "image": "https://i.ibb.co/Fs69mw9/20.jpg",
       "publisher": "Sports Chronicle",
       "tags": ["sports", "athletics", "competitions"],
       "description": "Catch up on the thrilling sports highlights and achievements from around the globe. Stay updated on your favorite athletes and sports events.",
@@ -162,7 +161,7 @@
     },
     {
       "title": "Fashion Trends to Follow This Season",
-      "image": "https://ibb.co/1n96v85",
+      "image": "https://i.ibb.co/yR8SfW1/21.jpg",
       "publisher": "Fashion Focus",
       "tags": ["fashion", "style", "trends"],
       "description": "Stay in vogue with the latest fashion trends and style inspirations. Explore the hottest looks for the season and elevate your fashion game.",
@@ -170,27 +169,27 @@
     },
     {
       "title": "Exploring Culinary Delights",
-      "image": "https://ibb.co/tLyg7FX",
-      "publisher": "Foodie's Paradise",
+      "image": "https://i.ibb.co/9ZR6FSt/22.jpg",
+      "publisher": "Fashion Focus",
       "tags": ["food", "culinary", "recipes"],
       "description": "Indulge in the world of culinary delights with mouth-watering recipes and food adventures. Discover the art of cooking and savor delicious flavors.",
       "totalViews": 2570
     },
     {
       "title": "Travel Escapades: Unexplored Destinations",
-      "image": "https://ibb.co/sRwFjL5",
-      "publisher": "Wanderlust Chronicles",
+      "image": "https://i.ibb.co/mTqHJQv/23.jpg",
+      "publisher": "Entertainment Express",
       "tags": ["travel", "adventure", "destinations"],
       "description": "Embark on a journey to unexplored destinations. Experience the thrill of adventure and discover hidden gems around the world with travel escapades.",
       "totalViews": 1660
     },
     {
       "title": "Educational Insights: Learning Beyond the Classroom",
-      "image": "https://ibb.co/zm2vWMc",
-      "publisher": "LearnSmart",
+      "image": "https://i.ibb.co/8mxZnC3/24.jpg",
+      "publisher": "TechNews",
       "tags": ["education", "learning", "knowledge"],
       "description": "Unlock educational insights and delve into learning beyond the classroom. Stay informed about innovative teaching methods, knowledge-sharing, and intellectual pursuits.",
      "totalViews": 903
     }
   ]
-}
+

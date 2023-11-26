@@ -4,11 +4,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
 
-import Navbar from "./Shared/Navbar";
+
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 import auth from "../Firebase/firebase.config";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../Hooks/UseAxiosPublic";
 
 
 const Login = () => {
@@ -16,6 +17,7 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   console.log(location);
+  const axiosPublic = useAxiosPublic();
 
   const { logIn } = useContext(AuthContext);
 
@@ -48,13 +50,21 @@ const Login = () => {
   const handleGoogleLogin = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: `${result.user.displayName} have logged in successfully!`,
-        });
-        navigate(location?.state ? location.state : "/");
-        console.log(result.user);
+         const userInfo = {
+           email: result.user?.email,
+           name: result.user?.displayName,
+         };
+         axiosPublic.post("/users", userInfo).then((res) => {
+           console.log(res.data);
+           Swal.fire({
+             icon: "success",
+             title: "Success!",
+             text: "You have registered successfully!",
+           });
+           navigate(location?.state ? location.state : "/");
+         });
+
+         console.log(result.user);
       })
       .catch((error) => {
         Swal.fire({

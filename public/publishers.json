@@ -1,5 +1,4 @@
-{
-  "publishers": [
+[
     {
       "name": "TechNews",
       "description": "Bringing you the latest in technology news.",
@@ -43,4 +42,4 @@
       "tags": ["fashion", "style", "trends"]
     }
   ]
-}
+

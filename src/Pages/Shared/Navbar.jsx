@@ -178,7 +178,7 @@ const Navbar = () => {
                 </ul>
               </div>
               <img
-                src="https://i.ibb.co/LvTvgkr/logo-fotor-20231019183055.png"
+                src="https://i.ibb.co/fM7RTJV/news-logo-1-removebg-preview.png"
                 className="w-[250px]  h-[150px]"
                 alt=""
               />
@@ -205,7 +205,7 @@ const Navbar = () => {
             >
               {user ? (
                 <div className="flex gap-4 items-center ">
-                  <Link to='/myProfile'>
+                  <Link to="/myProfile">
                     <div className="invisible lg:visible">
                       <img
                         className="rounded-full w-10 mx-auto "

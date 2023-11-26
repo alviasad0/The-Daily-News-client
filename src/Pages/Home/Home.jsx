@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet";
 import TrendingsArticles from "./Components/TrendingsArticles";
+import AllPublishers from "./Components/AllPublishers";
+
 
 const Home = () => {
     return (
@@ -7,8 +9,9 @@ const Home = () => {
         <Helmet>
           <title>The Daily News | Home</title>
         </Helmet>
-            <h1>this is home</h1>
+            
             <TrendingsArticles></TrendingsArticles>
+            <AllPublishers></AllPublishers>
       </div>
     );
 };
