@@ -13,6 +13,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import MyProfile from './../Pages/MyProfile/MyProfile';
 import ArticlesDetails from './../Pages/ArticlesDetails/ArticlesDetails';
+import Payment from './../Pages/Payment/Payment';
 
 export const router = createBrowserRouter([
   {
@@ -51,7 +52,6 @@ export const router = createBrowserRouter([
       {
         path: "premiumArticles",
         element: <PremiumArticles></PremiumArticles>,
-        
       },
       {
         path: "dashboard",
@@ -60,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path: "myProfile",
         element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "/payment",
+        element: <Payment></Payment>,
       },
       {
         path: `/articlesDetails/:_id`,
