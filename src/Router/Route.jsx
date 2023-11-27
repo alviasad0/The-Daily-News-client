@@ -14,6 +14,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import MyProfile from './../Pages/MyProfile/MyProfile';
 import ArticlesDetails from './../Pages/ArticlesDetails/ArticlesDetails';
 import Payment from './../Pages/Payment/Payment';
+import AddArticles from "../Pages/AddArticles";
 
 export const router = createBrowserRouter([
   {
@@ -33,10 +34,10 @@ export const router = createBrowserRouter([
         path: "register",
         element: <Register></Register>,
       },
-      //   {
-      //     path: "addArticles",
-      //     element: <AddArticles></AddArticles>,
-      //   },
+        {
+          path: "addArticles",
+          element: <AddArticles></AddArticles>,
+        },
       {
         path: "allArticles",
         element: <AllArticles></AllArticles>,
