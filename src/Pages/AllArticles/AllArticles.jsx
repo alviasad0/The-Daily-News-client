@@ -59,10 +59,12 @@ const AllArticles = () => {
 
 
 
-   const articles = data?.pages.reduce((acc, page) => {
-    console.log(page?.data);
-     return [...acc, ...page?.data || []];
-   }, []);
+   const articles = data?.pages
+     .reduce((acc, page) => {
+       console.log(page?.data);
+       return [...acc, ...(page?.data || [])];
+     }, [])
+     .filter((article) => article.status === "approved");
   console.log(hasNextPage);
 
 

@@ -4,7 +4,8 @@ import { TbPremiumRights } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const PremiumArticles = () => {
-  const [premiumArticles, setAllArticles] = useState([]);
+  const [allArticles, setAllArticles] = useState([]);
+  const premiumArticles = allArticles.filter(article=> article.status === "approved")
   const [selectedPublisher, setSelectedPublisher] = useState(null);
   console.log(premiumArticles);
  
