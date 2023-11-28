@@ -9,11 +9,12 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const AddArticle = () => {
   const [title, setTitle] = useState("");
-  const [authorName, setAuthorName] = useState("");
+ 
   const [image, setImage] = useState(null);
   const [publisherOptions, setPublisherOptions] = useState([]);
   const [selectedPublisher, setSelectedPublisher] = useState(null);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [premium, setPremium] = useState(false);
   const [description, setDescription] = useState("");
     const { user} = useContext(AuthContext)
 
@@ -43,9 +44,12 @@ const AddArticle = () => {
 
        const articleData = {
          title,
+         author: user?.displayName,
+         author_photoURL: user?.photoURL,
          image_url: imageUploadResponse.data.data.display_url,
          publisher: selectedPublisher.value,
          tags: selectedTags.map((tag) => tag.value),
+         premium,
          description,
          status: "pending",
        };
@@ -106,17 +110,7 @@ const AddArticle = () => {
                 required
               />
             </div>
-            <div className="flex  flex-col md:flex-row  items-center gap-10">
-              <label className="text-lg font-semibold ">Author Name :</label>
-              <input
-                className="input input-success w-full"
-                type="text"
-                value={user.displayName}
-                onChange={(e) => setAuthorName(e.target.value)}
-                placeholder="Title"
-                required
-              />
-            </div>
+
             <br />
             <div className="flex  flex-col md:flex-row  items-center gap-10">
               <label className="text-lg font-semibold ">Image:</label>
@@ -188,6 +182,20 @@ const AddArticle = () => {
                 required
               />
             </div>
+            <br />
+            <div className="flex  flex-col md:flex-row  items-center gap-10">
+              <label className="text-lg font-semibold ">Premium :</label>
+              <input
+                type="checkbox"
+                // checked="checked"
+                className="checkbox"
+                value={premium}
+                onChange={(e) => setPremium(e.target.value)}
+                
+              />
+             
+            </div>
+
             <br />
             <div className="flex  flex-col md:flex-row  items-center gap-10">
               <label className="text-lg font-semibold">Description:</label>

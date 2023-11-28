@@ -1,23 +1,32 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
-
+import { GrUpdate } from "react-icons/gr";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 const MyArticles = () => {
  const [allArticles, setAllArticles] = useState([]);
  const { user } = useContext(AuthContext);
  console.log(user);
+console.log(allArticles);
+const myArticels = allArticles.filter(
+  (article) => article.author === user?.displayName
+);   
+console.log(myArticels);
 
-const myArticels = allArticles.filter   
-
-
+  const handleDeleteArticle = (article) => { 
+    console.log(article);
+  }
+  const handleUpdateArticle = (article) => { 
+    console.log(article);
+  }
 
   useEffect(() => {
-    fetch("http://localhost:5000/allArticles")
+    fetch("http://localhost:5000/allArticlesData")
       .then((res) => res.json())
       .then((data) => setAllArticles(data));
-  },[])
+  },[user])
   return (
     <div>
-      <table className="table table-zebra w-full">
+      <table className="table table-zebra w-full text-lg font-bold">
         {/* head */}
         <thead>
           <tr>
@@ -31,30 +40,28 @@ const myArticels = allArticles.filter
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => (
-            <tr key={user._id}>
-              <th>{index + 1}</th>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
+          {myArticels.map((article, index) => (
+            <tr key={article._id}>
+              <th>{index + 1} .</th>
+              <td>{article.title}</td>
+              <td><button>Details</button></td>
               <td>
-                {user.role === "admin" ? (
-                  "Admin"
-                ) : (
-                  <button
-                    onClick={() => handleMakeAdmin(user)}
-                    className="btn btn-lg bg-orange-500"
-                  >
-                   
-                  </button>
-                )}
+                { article.status}
+              </td>
+              <td>
+                { article.premium}
               </td>
               <td>
                 <button
-                  onClick={() => handleDeleteUser(user)}
+                  onClick={() => handleUpdateArticle(article)}
                   className="btn btn-ghost btn-lg"
-                >
-                  
-                </button>
+                ><GrUpdate className="text-3xl  font-bold"></GrUpdate></button>
+              </td>
+              <td>
+                <button
+                  onClick={() => handleDeleteArticle(article)}
+                  className="btn btn-ghost btn-lg"
+                ><RiDeleteBin6Fill className="text-3xl text-red-800"></RiDeleteBin6Fill></button>
               </td>
             </tr>
           ))}
