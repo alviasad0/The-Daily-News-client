@@ -56,6 +56,8 @@ const Register = () => {
         const userInfo = {
           name: name,
           email: email,
+          role: "user",
+          image_url : userPic
         };
         console.log(userInfo);
         axiosPublic.post("/users", userInfo).then((res) => {

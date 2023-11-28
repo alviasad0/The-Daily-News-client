@@ -22,9 +22,9 @@ const MyProfile = () => {
      
      const updatedProfile = {
        image_url,
-       name
-    
-      
+       name,
+       role: logedinUser?.role ,
+       email: logedinUser?.email,
      };
 
      fetch(`http://localhost:5000/users/${logedinUser._id}`, {

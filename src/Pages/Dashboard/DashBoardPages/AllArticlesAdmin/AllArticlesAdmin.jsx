@@ -45,7 +45,7 @@ const AllArticlesAdmin = () => {
       title: article.title,
       author: article.author,
       author_photoURL: article.author_photoURL,
-      image_url: article.image_url,
+      image: article.image,
       premium: true,
       publisher: article.publisher,
 
@@ -101,7 +101,7 @@ const AllArticlesAdmin = () => {
       title: article.title,
       author: article.author,
       author_photoURL: article.author_photoURL,
-      image_url: article.image_url,
+      image: article.image,
       premium: article.premium,
       publisher: article.publisher,
 
@@ -185,7 +185,7 @@ const AllArticlesAdmin = () => {
         title: article.title,
         author: article.author,
         author_photoURL: article.author_photoURL,
-        image_url: article.image_url,
+        image: article.image,
         premium: article.premium,
         publisher: article.publisher,
 
