@@ -1,25 +1,26 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
+console.log(imageHostingKey);
+
 import Select from "react-select";
 
 const UserArticleUpdate = () => {
-    const nevigate = useNavigate()
+    // const nevigate = useNavigate()
     const article = useLoaderData()
     console.log(article);
     
     const [title, setTitle] = useState(article.title);
 
 
-     const [image, setImage] = useState(article.image_url);
+    
      const [publisherOptions, setPublisherOptions] = useState([]);
      const [selectedPublisher, setSelectedPublisher] = useState(article.publisher);
      const [selectedTags, setSelectedTags] = useState([article.tags]);
-     const [premium, setPremium] = useState(article.premium);
+     const [premium, setPremium] = useState(false);
      const [description, setDescription] = useState(article.description);
      const { user } = useContext(AuthContext);
 
@@ -38,69 +39,67 @@ const UserArticleUpdate = () => {
       }, []);
 
 
-       const handleSubmit = async (e) => {
-         e.preventDefault();
+     const handleSubmit = async (e) => {
+       e.preventDefault();
 
-         try {
-          let imageUploadResponse;
-          if (image) {
-            const imageFormData = new FormData();
-            imageFormData.append("image", image.file);
-            imageUploadResponse = await axios.post(
-              imageHostingApi,
-              imageFormData
-            );
-          }
-
-           const articleData = {
-             title,
-             author: user?.displayName,
-             author_photoURL: user?.photoURL,
-             image_url:
-               imageUploadResponse?.data?.data.display_url || article.image_url,
-             publisher: selectedPublisher?.value,
-             tags: selectedTags.map((tag) => tag.value),
-             premium,
-             description,
-             status: "pending",
-           };
-
-
-           
-     
-          console.log(articleData);
-      fetch(`http://localhost:5000/allArticles/${article._id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(articleData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          if (data.modifiedCount > 0) {
-            Swal.fire(
-              "Good job!",
-              "Product has Updated in the database!",
-              "success"
-            );
-          }
-        });
-
-             
-         } catch (error) {
-           console.error("Error adding article", error);
-         }
+       const articleData = {
+         title,
+         author: user?.displayName || "",
+         author_photoURL: user?.photoURL || "",
+         image_url: article?.image_url,
+         publisher: selectedPublisher?.value || "",
+         tags: selectedTags.map((tag) => tag.value),
+         premium: Boolean(premium),
+         description,
+         status: "pending",
        };
-       const handlePremiumChange = (newValue) => {
-         console.log("Premium value changed to:", newValue);
-         setPremium(newValue);
+
+       console.log("Sending data to server:", articleData);
+
+       try {
+         const response = await fetch(
+           `http://localhost:5000/allArticlesData/${article._id}`,
+           {
+             method: "PUT",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify(articleData),
+           }
+         );
+
+         const data = await response.json();
+
+         console.log("Response from server:", data);
+
+         if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
+           Swal.fire(
+             "Good job!",
+             "Product has Updated in the database!",
+             "success"
+           );
+         } else {
+           Swal.fire(
+             "Error!",
+             "Failed to update product in the database",
+             "error"
+           );
+         }
+       } catch (error) {
+         console.error("Error during fetch:", error);
+         Swal.fire(
+           "Error!",
+           "Failed to update product in the database",
+           "error"
+         );
+       }
+     };
+
+       const handlePremiumChange = (e) => {
+          const newValue = e.target.checked; // Use the checked property of the checkbox
+          console.log("Premium value changed to:", newValue);
+          setPremium(newValue);
     };
-    const handleImageChange = (e) => {
-      const newImage = e.target.files[0];
-      setImage(
-        newImage ? { file: newImage, url: URL.createObjectURL(newImage) } : null
-      );
-    };
+    
+    
 
     return (
       <div>
@@ -131,10 +130,10 @@ const UserArticleUpdate = () => {
                   <label className="text-lg font-semibold ">Image:</label>
                   <input
                                     type="file"
-                                    onChange={handleImageChange}
+                                    
                                     accept="image/*"
                                     className=""
-                                    value=''
+                                    value=""
                   />
                 </div>
                 <br />

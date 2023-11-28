@@ -9,13 +9,18 @@ import MyArticles from "../Pages/MyArticles/MyArticles";
 import Subscription from "../Pages/Subscription/Subscription";
 import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
 
-import Dashboard from "../Pages/Dashboard/Dashboard";
+
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import MyProfile from './../Pages/MyProfile/MyProfile';
 import ArticlesDetails from './../Pages/ArticlesDetails/ArticlesDetails';
 import Payment from './../Pages/Payment/Payment';
 import AddArticles from "../Pages/AddArticles";
 import UserArticleUpdate from './../Pages/MyArticles/Components/UserArticleUpdate';
+import AllArticlesAdmin from './../Pages/Dashboard/DashBoardPages/AllArticlesAdmin/AllArticlesAdmin';
+import Dashboard from './../Layout/Dashboard';
+import AllUsers from './../Pages/Dashboard/DashBoardPages/AllUsers/AllUsers';
+import AddPublishers from './../Pages/Dashboard/DashBoardPages/AddPublishers/AddPublishers';
+import AdminHome from './../Pages/Dashboard/DashBoardPages/AdminHome/AdminHome';
 
 export const router = createBrowserRouter([
   {
@@ -55,10 +60,7 @@ export const router = createBrowserRouter([
         path: "premiumArticles",
         element: <PremiumArticles></PremiumArticles>,
       },
-      {
-        path: "dashboard",
-        element: <Dashboard></Dashboard>,
-      },
+
       {
         path: "myProfile",
         element: <MyProfile></MyProfile>,
@@ -78,6 +80,28 @@ export const router = createBrowserRouter([
         element: <UserArticleUpdate></UserArticleUpdate>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/allArticles/${params._id}`),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "adminHome",
+        element: <AdminHome></AdminHome>,
+      },
+      {
+        path: "allArticles",
+        element: <AllArticlesAdmin></AllArticlesAdmin>,
+      },
+      {
+        path: "allUsers",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "addPublisher",
+        element: <AddPublishers></AddPublishers>,
       },
     ],
   },
