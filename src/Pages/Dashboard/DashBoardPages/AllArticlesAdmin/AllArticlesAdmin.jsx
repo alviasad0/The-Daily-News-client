@@ -20,13 +20,14 @@ const AllArticlesAdmin = () => {
     const handleStatus = (id) => {
       console.log(id);
     };
-    const handleSendReason = async(id) => {
+    const handleSendReason = async(article) => {
 
         
         const declinedMessage = {
-            article_id: id,
-            response: response
-        }
+          
+          article_id: article._id,
+          response: response,
+        };
         console.log(declinedMessage);
         const declinedMessageSubmissionResponse = await axios.post(
           "http://localhost:5000/declinedMessages",
@@ -50,7 +51,69 @@ const AllArticlesAdmin = () => {
           title: `Declined message send.`,
           showConfirmButton: false,
           timer: 1500,
-        });
+        })
+         const articleData = {
+           title: article.title,
+           author: article.author,
+           author_photoURL: article.author_photoURL,
+           image_url: article.image_url,
+           premium: article.premium,
+           publisher: article.publisher,
+           
+           tags: article.tags,
+           description: article.description,
+           status: "declined",
+         };
+
+       console.log("Sending data to server:", articleData);
+
+       try {
+         const response = await fetch(
+           `http://localhost:5000/allArticlesData/${article._id}`,
+           {
+             method: "PUT",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify(articleData),
+           }
+         );
+
+         const data = await response.json();
+
+         console.log("Response from server:", data);
+
+         if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
+                            const updatedArticlesResponse = await fetch(
+                              "http://localhost:5000/allArticlesData"
+                            );
+                            const updatedArticlesData =
+                              await updatedArticlesResponse.json();
+
+                           
+                            setAllArticles(updatedArticlesData);
+
+           Swal.fire(
+             "Good job!",
+             "Product has Updated in the database!",
+             "success"
+             );
+             
+         } else {
+           Swal.fire(
+             "Error!",
+             "Failed to update product in the database",
+             "error"
+           );
+         }
+       } catch (error) {
+         console.error("Error during fetch:", error);
+         Swal.fire(
+           "Error!",
+           "Failed to update product in the database",
+           "error"
+         );
+       }
+        
+       
         console.log(
           "Article submission response:",
           declinedMessageSubmissionResponse.data
@@ -151,8 +214,10 @@ const AllArticlesAdmin = () => {
                         </button>
                       )}
                     </td>
-                    <th>
-                      <button
+                        <th>
+                            {
+                                article.status === "approved" ? 
+                                 <div> <button
                         className=" w-20 font-bold py-3 rounded-lg text-main-blue-50 bg-gradient-to-r from-[#e75050] to-[#dd3333]"
                         onClick={() =>
                           document.getElementById(article?._id).showModal()
@@ -174,7 +239,7 @@ const AllArticlesAdmin = () => {
                               className="input mt-4 input-bordered border-2 text-main-blue-950 border-main-blue-300 rounded-lg w-full "
                             />
                             <button
-                              onClick={() => handleSendReason(article?._id)}
+                              onClick={() => handleSendReason(article)}
                               className=" px-6 mt-5 font-bold py-3 rounded-lg text-main-blue-50 bg-gradient-to-r from-[#e75050] to-[#dd3333]"
                             >
                               Send
@@ -188,7 +253,11 @@ const AllArticlesAdmin = () => {
                         <form method="dialog" className="modal-backdrop">
                           <button>close</button>
                         </form>
-                      </dialog>
+                                        </dialog></div> :
+                      <h1 className="text-red-600">Declined</h1>              
+
+                            }
+                     
                     </th>
                   </tr>
                 ))}

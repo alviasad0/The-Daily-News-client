@@ -56,7 +56,7 @@ const AddArticle = () => {
 
       console.log("Article FormData:", articleData);
       const articleSubmissionResponse = await axios.post(
-        "http://localhost:5000/allArticles",
+        "http://localhost:5000/allArticlesData",
         articleData,
         {
           headers: {

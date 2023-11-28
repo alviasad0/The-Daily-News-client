@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
-import axios from "axios";
+
 import Swal from "sweetalert2";
 const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 console.log(imageHostingKey);
@@ -17,26 +17,13 @@ const UserArticleUpdate = () => {
 
 
     
-     const [publisherOptions, setPublisherOptions] = useState([]);
-     const [selectedPublisher, setSelectedPublisher] = useState(article.publisher);
-     const [selectedTags, setSelectedTags] = useState([article.tags]);
-     const [premium, setPremium] = useState(false);
+    
+    
      const [description, setDescription] = useState(article.description);
      const { user } = useContext(AuthContext);
 
 
-      useEffect(() => {
-        axios
-          .get("http://localhost:5000/allPublishers")
-          .then((response) => {
-            const options = response.data.map((publisher) => ({
-              value: publisher.name,
-              label: publisher.name,
-            }));
-            setPublisherOptions(options);
-          })
-          .catch((error) => console.error("Error fetching publishers", error));
-      }, []);
+    
 
 
      const handleSubmit = async (e) => {
@@ -44,14 +31,14 @@ const UserArticleUpdate = () => {
 
        const articleData = {
          title,
-         author: user?.displayName || "",
-         author_photoURL: user?.photoURL || "",
-         image_url: article?.image_url,
-         publisher: selectedPublisher?.value || "",
-         tags: selectedTags.map((tag) => tag.value),
-         premium: Boolean(premium),
+         author: article.author,
+         author_photoURL: article.author_photoURL,
+         image_url: article.image_url,
+         premium: article.premium,
+         publisher: article.publisher,
+         status: article.status,
+         tags: article.tags,
          description,
-         status: "pending",
        };
 
        console.log("Sending data to server:", articleData);
@@ -93,12 +80,7 @@ const UserArticleUpdate = () => {
        }
      };
 
-       const handlePremiumChange = (e) => {
-          const newValue = e.target.checked; // Use the checked property of the checkbox
-          console.log("Premium value changed to:", newValue);
-          setPremium(newValue);
-    };
-    
+       
     
 
     return (
@@ -140,11 +122,9 @@ const UserArticleUpdate = () => {
                 <div className="flex  flex-col md:flex-row  items-center gap-10">
                   <label className="text-lg font-semibold">Publisher:</label>
                   <Select
-                    options={publisherOptions}
-                    value={selectedPublisher}
-                    onChange={(selectedOption) =>
-                      setSelectedPublisher(selectedOption)
-                    }
+                    options=''
+                    value=''
+                    
                     isSearchable
                   />
                 </div>
@@ -186,10 +166,8 @@ const UserArticleUpdate = () => {
                       { value: "books", label: "books" },
                       { value: "reading", label: "reading" },
                     ]}
-                    defaultValue={selectedTags}
-                    onChange={(selectedOptions) =>
-                      setSelectedTags(selectedOptions)
-                    }
+                    
+                    
                     isMulti
                     isSearchable
                     className="react-select-container select-error"
@@ -203,8 +181,8 @@ const UserArticleUpdate = () => {
                     type="checkbox"
                     // checked="checked"
                     className="checkbox checkbox-success"
-                    value={premium}
-                    onChange={() => handlePremiumChange(!premium)}
+                    value=''
+                    
                   />
                 </div>
 

@@ -55,7 +55,7 @@ const TrendingsArticles = () => {
                   <p>{article.description}</p>
                   <p>{article.publisher}</p>
                   <p className="">
-                    {article.tags.map((tag) => (
+                    {article?.tags?.map((tag) => (
                       <button
                         key={tag}
                         className="badge badge-success mr-2 text-lg font-medium"
