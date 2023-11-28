@@ -34,9 +34,7 @@ const AllUsers = () => {
       console.log("Response from server:", data);
 
       if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
-        const updatedUserInfo = await fetch(
-          "http://localhost:5000/allArticlesData"
-        );
+        const updatedUserInfo = await fetch("http://localhost:5000/users");
         const updatedUserData = await updatedUserInfo.json();
 
         setAllUsers(updatedUserData);
@@ -59,26 +57,90 @@ const AllUsers = () => {
       Swal.fire("Error!", "Failed to make  user to admin  in the database", "error");
     }
   };
+  const handleRemoveAdmin = async(user) => {
+      
+      
+ console.log(user);
+    const userData = {
+      name: user.name,
+      role: "user",
+      email: user.email,
+      image_url: user.image_url
+    };
+
+    console.log("Sending data to server:", userData);
+
+    try {
+      const response = await fetch(`http://localhost:5000/users/${user._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await response.json();
+
+      console.log("Response from server:", data);
+
+      if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
+        const updatedUserInfo = await fetch("http://localhost:5000/users");
+        const updatedUserData = await updatedUserInfo.json();
+
+        setAllUsers(updatedUserData);
+        
+
+        Swal.fire(
+          "Good job!",
+          "Admin has made user !",
+          "success"
+        );
+      } else {
+        Swal.fire(
+          "Error!",
+          "Failed to make user !",
+          "error"
+        );
+      }
+    } catch (error) {
+      console.error("Error during fetch:", error);
+      Swal.fire(
+        "Error!",
+        "Failed to make   admin to user   in the database",
+        "error"
+      );
+    }
+  };
 
   const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        console.log(id);
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-          }
-        });
+     console.log(id);
+     Swal.fire({
+       title: "Are you sure?",
+       text: "Remove from the cart !!",
+       icon: "warning",
+       showCancelButton: true,
+       confirmButtonColor: "#3085d6",
+       cancelButtonColor: "#d33",
+       confirmButtonText: "Yes, delete it!",
+     }).then((result) => {
+       if (result.isConfirmed) {
+         fetch(`http://localhost:5000/users/${id}`, {
+           method: "DELETE",
+         })
+           .then((response) => response.json())
+           .then((data) => {
+             console.log(data);
+               if (data.deletedCount > 0) {
+                 setAllUsers((prevUsers) =>
+                   prevUsers.filter((user) => user._id !== id)
+                 )
+               Swal.fire(
+                 "Good job!",
+                 "User has deleted from  the database!",
+                 "success"
+               );
+             }
+           });
+       }
+     });
       
     };
     useEffect(() => {
@@ -144,7 +206,12 @@ const AllUsers = () => {
                       Make Admin
                     </button>
                   ) : (
-                    ""
+                    <button
+                      onClick={() => handleRemoveAdmin(user)}
+                      className=" font-bold  rounded-lg text-black btn btn-error"
+                    >
+                      Remove Admin
+                    </button>
                   )}
                 </th>
               </tr>
