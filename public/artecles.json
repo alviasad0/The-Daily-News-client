@@ -9,7 +9,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date" : "2023-11-16",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Top Health Tips for a Healthy Lifestyle",
@@ -21,7 +23,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-12",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Business Trends Shaping the Future",
@@ -33,7 +37,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-14",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Exploring Scientific Discoveries",
@@ -45,7 +51,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-13",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Entertainment News Roundup",
@@ -57,7 +65,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-02",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Sports Highlights of the Month",
@@ -69,7 +79,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-10-12",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Fashion Trends to Follow This Season",
@@ -81,7 +93,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-12-01",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Exploring Culinary Delights",
@@ -93,7 +107,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-29",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Travel Escapades: Unexplored Destinations",
@@ -105,7 +121,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-02",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Educational Insights: Learning Beyond the Classroom",
@@ -117,7 +135,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-22",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Artistry Unveiled: Creative Expressions",
@@ -129,7 +149,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-12",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Green Living: Sustainable Lifestyles",
@@ -141,7 +163,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-15",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Mindfulness Practices for Everyday Wellbeing",
@@ -153,7 +177,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-08",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Bookworm's Haven: Literary Adventures",
@@ -165,7 +191,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-24",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "The Latest Tech Innovations",
@@ -177,7 +205,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-16",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Top Health Tips for a Healthy Lifestyle",
@@ -189,7 +219,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-19",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Business Trends Shaping the Future",
@@ -201,7 +233,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-21",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Exploring Scientific Discoveries",
@@ -213,7 +247,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-15",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Entertainment News Roundup",
@@ -225,7 +261,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-13",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Sports Highlights of the Month",
@@ -237,7 +275,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-23",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Fashion Trends to Follow This Season",
@@ -249,7 +289,9 @@
       "premium": false,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-12",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Exploring Culinary Delights",
@@ -260,8 +302,10 @@
       "totalViews": 2570,
       "premium": false,
       "status": "approved",
-      "author" : "Iliyas Kanchon ",
-      "author_photoURL" : "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author": "Iliyas Kanchon ",
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-09",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Travel Escapades: Unexplored Destinations",
@@ -273,7 +317,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-01",
+      "author_email": "illiyas@kanchon.com"
     },
     {
       "title": "Educational Insights: Learning Beyond the Classroom",
@@ -285,7 +331,9 @@
       "premium": true,
       "status": "approved",
       "author": "Iliyas Kanchon ",
-      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg"
+      "author_photoURL": "https://i.ibb.co/bmSZhTY/author-photo-URL.jpg",
+      "posting_date": "2023-11-25",
+      "author_email": "illiyas@kanchon.com"
     }
   ]
 
