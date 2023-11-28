@@ -46,7 +46,7 @@ const AddArticle = () => {
          title,
          author: user?.displayName,
          author_photoURL: user?.photoURL,
-         image_url: imageUploadResponse.data.data.display_url,
+         image: imageUploadResponse.data.data.display_url,
          publisher: selectedPublisher.value,
          tags: selectedTags.map((tag) => tag.value),
          premium,

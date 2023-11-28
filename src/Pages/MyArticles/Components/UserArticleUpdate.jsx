@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext,  useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 
@@ -22,7 +22,7 @@ const UserArticleUpdate = () => {
      const [description, setDescription] = useState(article.description);
      const { user } = useContext(AuthContext);
 
-
+     console.log(user);
     
 
 
@@ -33,7 +33,7 @@ const UserArticleUpdate = () => {
          title,
          author: article.author,
          author_photoURL: article.author_photoURL,
-         image_url: article.image_url,
+         image: article.image,
          premium: article.premium,
          publisher: article.publisher,
          status: article.status,
