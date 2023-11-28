@@ -88,6 +88,10 @@ const AddArticle = () => {
       console.error("Error adding article", error);
     }
   };
+  const handlePremiumChange = (newValue) => {
+    console.log("Premium value changed to:", newValue);
+    setPremium(newValue);
+  };
   return (
     <div>
       <h1 className="text-center text-5xl font-bold text-black uppercase underline pb-16">
@@ -188,12 +192,10 @@ const AddArticle = () => {
               <input
                 type="checkbox"
                 // checked="checked"
-                className="checkbox"
+                className="checkbox checkbox-success"
                 value={premium}
-                onChange={(e) => setPremium(e.target.value)}
-                
+                onChange={() => handlePremiumChange(!premium)}
               />
-             
             </div>
 
             <br />

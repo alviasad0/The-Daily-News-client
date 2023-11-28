@@ -1,0 +1,238 @@
+import { useContext, useEffect, useState } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
+const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
+import Select from "react-select";
+
+const UserArticleUpdate = () => {
+    const nevigate = useNavigate()
+    const article = useLoaderData()
+    console.log(article);
+    
+    const [title, setTitle] = useState(article.title);
+
+
+     const [image, setImage] = useState(article.image_url);
+     const [publisherOptions, setPublisherOptions] = useState([]);
+     const [selectedPublisher, setSelectedPublisher] = useState(article.publisher);
+     const [selectedTags, setSelectedTags] = useState([article.tags]);
+     const [premium, setPremium] = useState(article.premium);
+     const [description, setDescription] = useState(article.description);
+     const { user } = useContext(AuthContext);
+
+
+      useEffect(() => {
+        axios
+          .get("http://localhost:5000/allPublishers")
+          .then((response) => {
+            const options = response.data.map((publisher) => ({
+              value: publisher.name,
+              label: publisher.name,
+            }));
+            setPublisherOptions(options);
+          })
+          .catch((error) => console.error("Error fetching publishers", error));
+      }, []);
+
+
+       const handleSubmit = async (e) => {
+         e.preventDefault();
+
+         try {
+          let imageUploadResponse;
+          if (image) {
+            const imageFormData = new FormData();
+            imageFormData.append("image", image.file);
+            imageUploadResponse = await axios.post(
+              imageHostingApi,
+              imageFormData
+            );
+          }
+
+           const articleData = {
+             title,
+             author: user?.displayName,
+             author_photoURL: user?.photoURL,
+             image_url:
+               imageUploadResponse?.data?.data.display_url || article.image_url,
+             publisher: selectedPublisher?.value,
+             tags: selectedTags.map((tag) => tag.value),
+             premium,
+             description,
+             status: "pending",
+           };
+
+
+           
+     
+          console.log(articleData);
+      fetch(`http://localhost:5000/allArticles/${article._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(articleData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (data.modifiedCount > 0) {
+            Swal.fire(
+              "Good job!",
+              "Product has Updated in the database!",
+              "success"
+            );
+          }
+        });
+
+             
+         } catch (error) {
+           console.error("Error adding article", error);
+         }
+       };
+       const handlePremiumChange = (newValue) => {
+         console.log("Premium value changed to:", newValue);
+         setPremium(newValue);
+    };
+    const handleImageChange = (e) => {
+      const newImage = e.target.files[0];
+      setImage(
+        newImage ? { file: newImage, url: URL.createObjectURL(newImage) } : null
+      );
+    };
+
+    return (
+      <div>
+        <h1 className="text-center text-5xl font-bold underline uppercase text-black pb-10">
+          Update Your article
+        </h1>
+        <div>
+          <div className="bg-green-100 py-16 rounded-xl">
+            <div className="max-w-lg mx-auto">
+              <h1 className="text-center font-bold text-2xl uppercase pb-8">
+                Fill the form to add new articles
+              </h1>
+              <form onSubmit={handleSubmit}>
+                <div className="flex  flex-col md:flex-row  items-center gap-10">
+                  <label className="text-lg font-semibold ">Title:</label>
+                  <input
+                    className="input input-success w-full"
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Title"
+                    required
+                  />
+                </div>
+
+                <br />
+                <div className="flex  flex-col md:flex-row  items-center gap-10">
+                  <label className="text-lg font-semibold ">Image:</label>
+                  <input
+                                    type="file"
+                                    onChange={handleImageChange}
+                                    accept="image/*"
+                                    className=""
+                                    value=''
+                  />
+                </div>
+                <br />
+                <div className="flex  flex-col md:flex-row  items-center gap-10">
+                  <label className="text-lg font-semibold">Publisher:</label>
+                  <Select
+                    options={publisherOptions}
+                    value={selectedPublisher}
+                    onChange={(selectedOption) =>
+                      setSelectedPublisher(selectedOption)
+                    }
+                    isSearchable
+                  />
+                </div>
+                <br />
+
+                <div className="flex  flex-col md:flex-row  items-center gap-10">
+                  <label className="text-lg font-semibold">Tags:</label>
+                  <Select
+                    options={[
+                      { value: "technology", label: "technology" },
+                      { value: "health", label: "health" },
+                      { value: "wellness", label: "wellness" },
+                      { value: "medical", label: "medical" },
+                      { value: "innovation", label: "innovation" },
+                      { value: "gadgets", label: "gadgets" },
+                      { value: "buisness", label: "buisness" },
+                      { value: "finance", label: "finance" },
+                      { value: "economy", label: "economy" },
+                      { value: "science", label: "science" },
+                      { value: "discover", label: "discover" },
+                      { value: "research", label: "research" },
+                      { value: "celebrities", label: "celebrities" },
+                      { value: "entertainment", label: "entertainment" },
+                      { value: "movies", label: "movies" },
+                      { value: "travel", label: "travel" },
+                      { value: "adventure", label: "adventure" },
+                      { value: "destiantion", label: "destiantion" },
+                      { value: "food", label: "food" },
+                      { value: "culinary", label: "culinary" },
+                      { value: "recipes", label: "recipes" },
+                      { value: "fashion", label: "fashion" },
+                      { value: "trends", label: "trends" },
+                      { value: "style", label: "style" },
+                      { value: "art", label: "art" },
+                      { value: "creativity", label: "creativity" },
+                      { value: "education", label: "education" },
+                      { value: "learning", label: "learning" },
+                      { value: "environement", label: "environement" },
+                      { value: "books", label: "books" },
+                      { value: "reading", label: "reading" },
+                    ]}
+                    defaultValue={selectedTags}
+                    onChange={(selectedOptions) =>
+                      setSelectedTags(selectedOptions)
+                    }
+                    isMulti
+                    isSearchable
+                    className="react-select-container select-error"
+                    classNamePrefix="react-select"
+                  />
+                </div>
+                <br />
+                <div className="flex  flex-col md:flex-row  items-center gap-10">
+                  <label className="text-lg font-semibold ">Premium :</label>
+                  <input
+                    type="checkbox"
+                    // checked="checked"
+                    className="checkbox checkbox-success"
+                    value={premium}
+                    onChange={() => handlePremiumChange(!premium)}
+                  />
+                </div>
+
+                <br />
+                <div className="flex  flex-col md:flex-row  items-center gap-10">
+                  <label className="text-lg font-semibold">Description:</label>
+                  <input
+                    type="text"
+                    className="input input-success w-full"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Description  "
+                  />
+                </div>
+                <br />
+                <button
+                  type="submit"
+                  className="btn btn-success uppercase text-xl font-bold "
+                >
+                  UPDATE
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+};
+
+export default UserArticleUpdate;

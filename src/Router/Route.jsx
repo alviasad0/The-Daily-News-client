@@ -15,6 +15,7 @@ import MyProfile from './../Pages/MyProfile/MyProfile';
 import ArticlesDetails from './../Pages/ArticlesDetails/ArticlesDetails';
 import Payment from './../Pages/Payment/Payment';
 import AddArticles from "../Pages/AddArticles";
+import UserArticleUpdate from './../Pages/MyArticles/Components/UserArticleUpdate';
 
 export const router = createBrowserRouter([
   {
@@ -34,10 +35,10 @@ export const router = createBrowserRouter([
         path: "register",
         element: <Register></Register>,
       },
-        {
-          path: "addArticles",
-          element: <AddArticles></AddArticles>,
-        },
+      {
+        path: "addArticles",
+        element: <AddArticles></AddArticles>,
+      },
       {
         path: "allArticles",
         element: <AllArticles></AllArticles>,
@@ -69,6 +70,12 @@ export const router = createBrowserRouter([
       {
         path: `/articlesDetails/:_id`,
         element: <ArticlesDetails></ArticlesDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allArticles/${params._id}`),
+      },
+      {
+        path: `articleUpdate/:_id`,
+        element: <UserArticleUpdate></UserArticleUpdate>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/allArticles/${params._id}`),
       },
