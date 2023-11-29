@@ -1,23 +1,35 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
 import { IoPersonAdd } from "react-icons/io5";
 import { RiArticleFill } from "react-icons/ri";
 import { Helmet } from "react-helmet";
 import Navbar from "../Pages/Shared/Navbar";
 import Footer from "../Pages/Shared/Footer";
+import { useEffect } from "react";
+
 
 const Dashboard = () => {
+     const navigate = useNavigate();
+
+     // This will navigate to "adminHome" when the Dashboard component is mounted
+     useEffect(() => {
+       navigate("/dashboard/adminHome");
+     }, []);
     return (
       <div>
         <Helmet>
           <title>The Daily News | Dashboard</title>
-            </Helmet>
-            <Navbar></Navbar>
+        </Helmet>
+        <Navbar></Navbar>
         <div className="flex h-auto">
-          <div className="w-64 min-h-full bg-main-blue-500 text-main-blue-50">
-            <ul className="menu text-lg mb-5 p-4">
+          <div className="w-64 min-h-full bg-green-100 rounded-xl text-main-blue-50">
+            <ul className="menu text-xl  mb-5 p-4">
               <li>
-                <NavLink className=" font-bold " to="/dashboard/adminHome">
+                <NavLink
+                  
+                  className=" font-bold "
+                  to="/dashboard/adminHome"
+                >
                   {/* <IoMdHome /> */}
                   Admin Home
                 </NavLink>
@@ -46,8 +58,8 @@ const Dashboard = () => {
           <div className="flex-1 bg-main-blue-100">
             <Outlet></Outlet>
           </div>
-            </div>
-            <Footer></Footer>
+        </div>
+        <Footer></Footer>
       </div>
     );
 };

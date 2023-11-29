@@ -30,7 +30,7 @@ const PublicationPieChart = () => {
         100,
     ])
   );
-
+   
   return (
     <Chart
       chartType="PieChart"
@@ -51,3 +51,4 @@ const PublicationPieChart = () => {
 };
 
 export default PublicationPieChart;
+
