@@ -19,8 +19,9 @@ import UserArticleUpdate from './../Pages/MyArticles/Components/UserArticleUpdat
 import AllArticlesAdmin from './../Pages/Dashboard/DashBoardPages/AllArticlesAdmin/AllArticlesAdmin';
 import Dashboard from './../Layout/Dashboard';
 import AllUsers from './../Pages/Dashboard/DashBoardPages/AllUsers/AllUsers';
-import AddPublishers from './../Pages/Dashboard/DashBoardPages/AddPublishers/AddPublishers';
+
 import AdminHome from './../Pages/Dashboard/DashBoardPages/AdminHome/AdminHome';
+import AddPublisher from './../Pages/Dashboard/DashBoardPages/AddPublishers/AddPublisher';
 
 export const router = createBrowserRouter([
   {
@@ -101,7 +102,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "addPublisher",
-        element: <AddPublishers></AddPublishers>,
+        element: <AddPublisher></AddPublisher>,
       },
     ],
   },
