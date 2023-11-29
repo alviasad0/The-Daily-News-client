@@ -12,29 +12,34 @@ import { Helmet } from "react-helmet";
 import useAxiosPublic from "../Hooks/UseAxiosPublic";
 
 
-const Login = () => {
-  useEffect(() => {
-    fetch("http://localhost:5000/users")
-      .then((res) => res.json())
-      .then((data) => setAllUsers(data));
-  }, []);
-
-     const [allUsers, setAllUsers] = useState([]);
-    
-   
+const Login =  () => {
+ 
+  const [allUsers, setAllUsers] = useState([]);
   const googleProvider = new GoogleAuthProvider();
   const location = useLocation();
   const navigate = useNavigate();
   console.log(location);
   const axiosPublic = useAxiosPublic();
 
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => setAllUsers(data));
+  }, []);
+
+    
+   
+  
+
   const { logIn } = useContext(AuthContext);
 
-  const handleLogin = (event) => {
+  const handleLogin =async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    logIn(email, password)
+
+    
+    logIn (email, password)
       .then((result) => {
         Swal.fire({
           icon: "success",
@@ -54,12 +59,65 @@ const Login = () => {
           const currentDate = new Date().toISOString();
           console.log(currentDate);
           console.log(premiumTokenExpirationDate);
+
+
           if (currentDate > premiumTokenExpirationDate) {
             Swal.fire({
               icon: "warning",
               title: "Subscription Expired",
               text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
             });
+
+
+
+            const userData = {
+              name: logedInUser.name,
+              role: logedInUser.role,
+              email: logedInUser.email,
+              image_url: logedInUser.image_url,
+              premiumTaken: null,
+            };
+
+    console.log("Sending data to server:", userData);
+
+    try {
+      const response =await fetch(`http://localhost:5000/users/${logedInUser._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+      const data = response.json();
+
+    //   axiosPublic.put(`/users/${logedInUser._id}`, userData).then(res => {
+    //    console.log(res.data);
+    //  });
+
+
+      console.log("Response from server:", data);
+
+      if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
+        const updatedUserInfo = fetch("http://localhost:5000/users");
+        const updatedUserData = updatedUserInfo.json();
+
+        setAllUsers(updatedUserData);
+        
+
+        Swal.fire(
+          "Good job!",
+          "USer has made admin !",
+          "success"
+        );
+      } else {
+        Swal.fire(
+          "Error!",
+          "Failed to make admin !",
+          "error"
+        );
+      }
+    } catch (error) {
+      console.error("Error during fetch:", error);
+      Swal.fire("Error!", "Failed to make  user to admin  in the database", "error");
+    }
           } else {
             Swal.fire({
               icon: "success",

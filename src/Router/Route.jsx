@@ -3,13 +3,10 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
-// import AddArticles from "../Pages/AddArticles";
 import AllArticles from "../Pages/AllArticles/AllArticles";
 import MyArticles from "../Pages/MyArticles/MyArticles";
 import Subscription from "../Pages/Subscription/Subscription";
 import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
-
-
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import MyProfile from './../Pages/MyProfile/MyProfile';
 import ArticlesDetails from './../Pages/ArticlesDetails/ArticlesDetails';
@@ -19,9 +16,9 @@ import UserArticleUpdate from './../Pages/MyArticles/Components/UserArticleUpdat
 import AllArticlesAdmin from './../Pages/Dashboard/DashBoardPages/AllArticlesAdmin/AllArticlesAdmin';
 import Dashboard from './../Layout/Dashboard';
 import AllUsers from './../Pages/Dashboard/DashBoardPages/AllUsers/AllUsers';
-
 import AdminHome from './../Pages/Dashboard/DashBoardPages/AdminHome/AdminHome';
 import AddPublisher from './../Pages/Dashboard/DashBoardPages/AddPublishers/AddPublisher';
+import PrivateRouter from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -43,7 +40,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "addArticles",
-        element: <AddArticles></AddArticles>,
+        element: (
+          <PrivateRouter>
+            <AddArticles></AddArticles>
+          </PrivateRouter>
+        ),
       },
       {
         path: "allArticles",
@@ -51,28 +52,52 @@ export const router = createBrowserRouter([
       },
       {
         path: "myArticles",
-        element: <MyArticles></MyArticles>,
+        element: (
+          <PrivateRouter>
+            <MyArticles></MyArticles>
+          </PrivateRouter>
+        ),
       },
       {
         path: "subscriptions",
-        element: <Subscription></Subscription>,
+        element: (
+          <PrivateRouter>
+            <Subscription></Subscription>
+          </PrivateRouter>
+        ),
       },
       {
         path: "premiumArticles",
-        element: <PremiumArticles></PremiumArticles>,
+        element: (
+          <PrivateRouter>
+            <PremiumArticles></PremiumArticles>
+          </PrivateRouter>
+        ),
       },
 
       {
         path: "myProfile",
-        element: <MyProfile></MyProfile>,
+        element: (
+          <PrivateRouter>
+            <MyProfile></MyProfile>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/payment",
-        element: <Payment></Payment>,
+        element: (
+          <PrivateRouter>
+            <Payment></Payment>
+          </PrivateRouter>
+        ),
       },
       {
         path: `/articlesDetails/:_id`,
-        element: <ArticlesDetails></ArticlesDetails>,
+        element: (
+          <PrivateRouter>
+            <ArticlesDetails></ArticlesDetails>
+          </PrivateRouter>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/allArticles/${params._id}`),
       },
@@ -86,7 +111,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRouter>
+        <Dashboard></Dashboard>
+      </PrivateRouter>
+    ),
 
     children: [
       {

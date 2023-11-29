@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { themeChange } from 'theme-change';
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -6,8 +6,11 @@ import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    
-
+    console.log(user);
+       const [allUsers, setAllUsers] = useState([]);
+    const logedInUser = allUsers.find((User) => User.email === user?.email);
+    console.log(logedInUser);
+   
 
     
 
@@ -101,8 +104,14 @@ const Navbar = () => {
   );
   useEffect(() => {
     themeChange(false);
-    // 👆 false parameter is required for react project
+    
   }, []);
+
+    useEffect(() => {
+      fetch("http://localhost:5000/users")
+        .then((res) => res.json())
+        .then((data) => setAllUsers(data));
+    }, []);
 
   return (
     <div className="mx-auto max-w-screen-2xl ">

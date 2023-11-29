@@ -33,19 +33,39 @@ const Statics = () => {
   }, [axiosPublic]);
   return (
     <div className="mt-28">
-      <div >
+      <div>
         <div>
-          <h2 className="pb-10 text-center text-5xl font-bold text-black underline uppercase ">Users Statistics</h2>
-          <div className="bg-green-100 rounded-xl">
-            <p>
-              All Users: <CountUp end={allUsers.length} />
-            </p>
-            <p>
-              Normal Users: <CountUp end={normalUsersCount} />
-            </p>
-            <p>
-              Premium Users: <CountUp end={premiumUsersCount} />
-            </p>
+          <h2 className="pb-10 text-center text-5xl font-bold text-black underline uppercase ">
+            Users Statistics
+          </h2>
+          <div className="bg-green-100 rounded-xl max-w-7xl mx-auto ">
+            <div className="py-10 grid grid-cold-1 items-center justify-center   md:grid-cols-3   ">
+              <div className="border-2 h-[300px] w-[200px] md:w-[400px] bg-violet-500  rounded-xl ">
+                <p className="text-center pt-16 pb-10 text-7xl text-black font-bold">
+                  {" "}
+                  <CountUp end={allUsers.length} />
+                </p>{" "}
+                <p className="text-center text-4xl font-bold text-black ">
+                  All Users
+                </p>
+              </div>
+              <div className="border-2 h-[300px]  w-[200px] md:w-[400px] bg-green-500  rounded-xl">
+                <p className="text-center text-7xl text-black font-bold pb-10 pt-16 ">
+                  {" "}
+                  <CountUp end={normalUsersCount} />
+                </p>
+                <p className="text-center text-4xl font-bold text-black ">Normal Users</p>
+              </div>
+              <div className="border-2 h-[300px] w-[200px] md:w-[400px] bg-red-500  rounded-xl">
+                <p className="text-center pt-16 pb-10 text-7xl text-black font-bold">
+                  {" "}
+                  <CountUp end={premiumUsersCount} />
+                </p>{" "}
+                <p className="text-center text-4xl font-bold text-black ">
+                  Premium Users
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

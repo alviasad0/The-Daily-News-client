@@ -22,9 +22,23 @@ const AllPublishers = () => {
           {allPublishers.map((publishers) => (
             <div key={publishers._id} className="card  bg-green-100 text-black">
               <div className="card-body">
-                <h2 className="card-title">{publishers.name}</h2>
-                <p>{publishers.description}</p>
-                <p>{publishers.website}</p>
+                <figure className="w-[300px] rounded-xl h-[200px] mx-auto">
+                  <img
+                    src={publishers.image}
+                    className="w-full h-full"
+                    alt=""
+                  />
+                </figure>
+                <h2 className="text-2xl font-bold pt-5">{publishers.name}</h2>
+                <p className="text-md text-black font-medium ">
+                  {publishers.description}
+                </p>
+                <p className="font-semibold ">
+                  Website :{" "}
+                  <span className="font-bold">
+                    <a href="">{publishers.website}</a>
+                  </span>
+                </p>
                 <p className="">
                   {publishers?.tags?.map((tag) => (
                     <button
@@ -35,11 +49,6 @@ const AllPublishers = () => {
                     </button>
                   ))}
                 </p>
-                <div className="card-actions justify-end">
-                  <button className="btn">
-                    <Link >View Details</Link>
-                  </button>
-                </div>
               </div>
             </div>
           ))}
