@@ -26,7 +26,7 @@ const AllPublishers = () => {
                 <p>{publishers.description}</p>
                 <p>{publishers.website}</p>
                 <p className="">
-                  {publishers.tags.map((tag) => (
+                  {publishers?.tags?.map((tag) => (
                     <button
                       key={tag}
                       className="badge badge-success mr-2 text-lg font-medium"

@@ -3,43 +3,50 @@
       "name": "TechNews",
       "description": "Bringing you the latest in technology news.",
       "website": "https://technews.example.com",
-      "tags": ["technology", "gadgets", "innovation"]
+      "tags": ["technology", "gadgets", "innovation"],
+      "image": "https://i.ibb.co/nkxXXJj/publication-banner.jpg"
     },
     {
       "name": "Health Gazette",
       "description": "Your source for health-related news and updates.",
       "website": "https://healthgazette.example.com",
-      "tags": ["health", "wellness", "medical"]
+      "tags": ["health", "wellness", "medical"],
+      "image": "https://i.ibb.co/smjKF3T/pub2.png"
     },
     {
       "name": "Business Insight",
       "description": "In-depth coverage of business and finance news.",
       "website": "https://businessinsight.example.com",
-      "tags": ["business", "finance", "economy"]
+      "tags": ["business", "finance", "economy"],
+      "image": "https://i.ibb.co/cTM35zW/pub3.jpg"
     },
     {
       "name": "Science Spectrum",
       "description": "Exploring the wonders of science and discovery.",
       "website": "https://sciencespectrum.example.com",
-      "tags": ["science", "discovery", "research"]
+      "tags": ["science", "discovery", "research"],
+      "image": "https://i.ibb.co/yySMg6R/pub4.png"
     },
     {
       "name": "Entertainment Express",
       "description": "Your ticket to the latest in entertainment news.",
       "website": "https://entertainmentexpress.example.com",
-      "tags": ["entertainment", "celebrities", "movies"]
+      "tags": ["entertainment", "celebrities", "movies"],
+      "image": "https://i.ibb.co/GM0LY6F/pub5.png"
     },
     {
       "name": "Sports Chronicle",
       "description": "Covering the world of sports and athletic achievements.",
       "website": "https://sportschronicle.example.com",
-      "tags": ["sports", "athletics", "competitions"]
+      "tags": ["sports", "athletics", "competitions"],
+      "image": "https://i.ibb.co/DbnxM2C/pub6.jpg"
     },
     {
       "name": "Fashion Focus",
       "description": "Setting trends in the world of fashion.",
       "website": "https://fashionfocus.example.com",
-      "tags": ["fashion", "style", "trends"]
+      "tags": ["fashion", "style", "trends"],
+      "image": "https://i.ibb.co/hfxhMQm/pub7.png"
     }
   ]
 

@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+    import { useForm } from "react-hook-form";
 
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../../Hooks/UseAxiosPublic";
@@ -7,16 +7,19 @@ const AddPublisher = () => {
   const axiosPublic = useAxiosPublic();
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+      console.log(data);
+      const tags = [data.tags]
+      console.log(tags);
     const publisher = {
       name: data.name,
       image: data.image,
       description: data.description,
       website: data.website,
-      tags: data.tags,
+      tags
     };
     axiosPublic.post("/allPublishers", publisher).then((res) => {
-      if (res.data.success) {
+        console.log(res);
+      if (res.data.insertedId) {
         Swal.fire({
           position: "center",
           icon: "success",
