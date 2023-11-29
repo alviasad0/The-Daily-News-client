@@ -28,7 +28,7 @@ const Login =  () => {
   }, []);
 
     
-   
+  
   
 
   const { logIn } = useContext(AuthContext);
@@ -37,87 +37,150 @@ const Login =  () => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
+    try {
 
-    
-    logIn (email, password)
-      .then((result) => {
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: `${result.user.email} have logged in successfully!`,
-        });
+      const result = await logIn(email, password)
+      
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: `${result.user.email} have logged in successfully!`,
+      });
         
-        console.log(result);
-        console.log(result.user.email);
-        const logedInUser = allUsers.find(
-          (user) => user.email === result.user.email
-        );
-        console.log(logedInUser?.premiumTaken);
-        if (logedInUser) {
-          const premiumTokenExpirationDate = logedInUser?.premiumTaken;
+      console.log(result);
+      console.log(result.user.email);
+      const logedInUser = allUsers.find(
+        (user) => user.email === result.user.email
+      );
+      console.log(logedInUser?.premiumTaken);
 
+
+      if (logedInUser) {
+        const premiumTokenExpirationDate = logedInUser?.premiumTaken;
+
+        const currentDate = new Date().toISOString();
+        console.log(currentDate);
+        console.log(premiumTokenExpirationDate);
+
+
+        if (currentDate > premiumTokenExpirationDate) {
+          Swal.fire({
+            icon: "warning",
+            title: "Subscription Expired",
+            text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
+          });
+
+
+
+          const userData = {
+            name: logedInUser.name,
+            role: logedInUser.role,
+            email: logedInUser.email,
+            image_url: logedInUser.image_url,
+            premiumTaken: null,
+          };
+
+          console.log("Sending data to server:", userData);
+
+          try {
+            const response = await fetch(`http://localhost:5000/users/${logedInUser._id}`, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(userData),
+            });
+            const data = await response.json();
+
+   
+
+
+            console.log("Response from server:", data);
+
+            if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
+              setAllUsers((prevUsers) =>
+                prevUsers.map((user) =>
+                  user._id === logedInUser._id
+                    ? { ...user, premiumTaken: null }
+                    : user
+                )
+              );
+        
+
+              Swal.fire(
+                "Good job!",
+                "User subscription has been updated!",
+                "success"
+              );
+            } else {
+              Swal.fire("Error!", "Failed to update user subscription!", "error");
+            }
+          } catch (error) {
+            console.error("Error during fetch:", error);
+            Swal.fire(
+              "Error!",
+              "Failed to update user subscription in the database",
+              "error"
+            );
+          }
+        } else {
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: `${result.user.email} have logged in successfully with an active subscription!`,
+          });
+        }
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "User not found",
+          text: `Could not find user information. Please try again later.`,
+        });
+      }
+        
+      navigate(location?.state ? location.state : "/");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error.message}`,
+      });
+      console.log(error.message);
+    }
+
+}
+
+  /* google login */
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log(res.data)
+                       
+
+             
+          
+          navigate(location?.state ? location.state : "/");
+        });
+          
+        console.log(result.user.email);
+        const logedInUser = allUsers.find(user => user.email === result.user.email)
+        console.log(logedInUser?.premiumTaken)
+        if (logedInUser) {
+          const premiumTokenExpirationDate =
+            logedInUser?.premiumTaken
+           
           const currentDate = new Date().toISOString();
           console.log(currentDate);
           console.log(premiumTokenExpirationDate);
-
-
           if (currentDate > premiumTokenExpirationDate) {
             Swal.fire({
               icon: "warning",
               title: "Subscription Expired",
               text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
             });
-
-
-
-            const userData = {
-              name: logedInUser.name,
-              role: logedInUser.role,
-              email: logedInUser.email,
-              image_url: logedInUser.image_url,
-              premiumTaken: null,
-            };
-
-    console.log("Sending data to server:", userData);
-
-    try {
-      const response =await fetch(`http://localhost:5000/users/${logedInUser._id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      });
-      const data = response.json();
-
-    //   axiosPublic.put(`/users/${logedInUser._id}`, userData).then(res => {
-    //    console.log(res.data);
-    //  });
-
-
-      console.log("Response from server:", data);
-
-      if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
-        const updatedUserInfo = fetch("http://localhost:5000/users");
-        const updatedUserData = updatedUserInfo.json();
-
-        setAllUsers(updatedUserData);
-        
-
-        Swal.fire(
-          "Good job!",
-          "USer has made admin !",
-          "success"
-        );
-      } else {
-        Swal.fire(
-          "Error!",
-          "Failed to make admin !",
-          "error"
-        );
-      }
-    } catch (error) {
-      console.error("Error during fetch:", error);
-      Swal.fire("Error!", "Failed to make  user to admin  in the database", "error");
-    }
           } else {
             Swal.fire({
               icon: "success",
@@ -126,87 +189,16 @@ const Login =  () => {
             });
           }
         } else {
+           
           Swal.fire({
             icon: "error",
             title: "User not found",
             text: `Could not find user information. Please try again later.`,
           });
         }
-        
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: `Password doesn't match`,
-        });
-        console.log(error.message);
-      });
-    console.log(email, password);
-  };
-
-  /* google login */
-  const handleGoogleLogin = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-         const userInfo = {
-           email: result.user?.email,
-           name: result.user?.displayName,
-         };
-         axiosPublic.post("/users", userInfo).then((res) => {
-             console.log(res.data)
-                       
-
-             
-          
-           navigate(location?.state ? location.state : "/");
-          });
-          
-          console.log(result.user.email);
-          const logedInUser = allUsers.find(user => user.email === result.user.email) 
-          console.log(logedInUser?.premiumTaken)
-         if (logedInUser) {
-           const premiumTokenExpirationDate = 
-             logedInUser?.premiumTaken
-           
-           const currentDate = new Date().toISOString();
- console.log(currentDate);
- console.log(premiumTokenExpirationDate);
-           if (currentDate > premiumTokenExpirationDate) {
-             Swal.fire({
-               icon: "warning",
-               title: "Subscription Expired",
-               text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
-             });
-           } else {
-             Swal.fire({
-               icon: "success",
-               title: "Success!",
-               text: `${result.user.email} have logged in successfully with an active subscription!`,
-             });
-           }
-         } else {
-           
-           Swal.fire({
-             icon: "error",
-             title: "User not found",
-             text: `Could not find user information. Please try again later.`,
-           });
-         }
 
       })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: `${error.message}`,
-        });
-        console.log(error.message);
-      });
-    console.log("Google mama  coming");
-    
-  };
+  }
   return (
     <div>
       <Helmet>
