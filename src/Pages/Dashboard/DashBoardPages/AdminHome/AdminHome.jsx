@@ -1,8 +1,11 @@
+import PublicationPieChart from "./Components/PublicationPieChart";
+
 
 const AdminHome = () => {
     return (
         <div>
- <h1>this is the home for the admin </h1>            
+              
+            <PublicationPieChart></PublicationPieChart>
         </div>
     );
 };
