@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
@@ -11,6 +11,13 @@ import { Helmet } from "react-helmet";
 import useAxiosPublic from "../Hooks/UseAxiosPublic";
 
 const Register = () => {
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => setAllUsers(data));
+  }, []);
+
+  const [allUsers, setAllUsers] = useState([]);
   const navigate = useNavigate();
   const { createUser, setUserName, setProfilePicture } =
     useContext(AuthContext);
@@ -98,16 +105,46 @@ const Register = () => {
        };
        axiosPublic.post("/users", userInfo).then((res) => {
          console.log(res.data);
-         Swal.fire({
-           icon: "success",
-           title: "Success!",
-           text: "You have registered successfully!",
-         });
+        //  Swal.fire({
+        //    icon: "success",
+        //    title: "Success!",
+        //    text: "You have registered successfully!",
+        //  });
          navigate(location?.state ? location.state : "/");
        });
 
 
-        
+         console.log(result.user.email);
+         const logedInUser = allUsers.find(
+           (user) => user.email === result.user.email
+         );
+         console.log(logedInUser?.premiumTaken);
+         if (logedInUser) {
+           const premiumTokenExpirationDate = logedInUser?.premiumTaken;
+
+           const currentDate = new Date().toISOString();
+           console.log(currentDate);
+           console.log(premiumTokenExpirationDate);
+           if (currentDate > premiumTokenExpirationDate) {
+             Swal.fire({
+               icon: "warning",
+               title: "Subscription Expired",
+               text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
+             });
+           } else {
+             Swal.fire({
+               icon: "success",
+               title: "Success!",
+               text: `${result.user.email} have logged in successfully with an active subscription!`,
+             });
+           }
+         } else {
+           Swal.fire({
+             icon: "error",
+             title: "User not found",
+             text: `Could not find user information. Please try again later.`,
+           });
+         }
         console.log(result.user);
       })
       .catch((error) => {

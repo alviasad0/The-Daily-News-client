@@ -1,5 +1,5 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
@@ -13,6 +13,15 @@ import useAxiosPublic from "../Hooks/UseAxiosPublic";
 
 
 const Login = () => {
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => setAllUsers(data));
+  }, []);
+
+     const [allUsers, setAllUsers] = useState([]);
+    
+   
   const googleProvider = new GoogleAuthProvider();
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,7 +41,40 @@ const Login = () => {
           title: "Success!",
           text: `${result.user.email} have logged in successfully!`,
         });
+        
         console.log(result);
+        console.log(result.user.email);
+        const logedInUser = allUsers.find(
+          (user) => user.email === result.user.email
+        );
+        console.log(logedInUser?.premiumTaken);
+        if (logedInUser) {
+          const premiumTokenExpirationDate = logedInUser?.premiumTaken;
+
+          const currentDate = new Date().toISOString();
+          console.log(currentDate);
+          console.log(premiumTokenExpirationDate);
+          if (currentDate > premiumTokenExpirationDate) {
+            Swal.fire({
+              icon: "warning",
+              title: "Subscription Expired",
+              text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
+            });
+          } else {
+            Swal.fire({
+              icon: "success",
+              title: "Success!",
+              text: `${result.user.email} have logged in successfully with an active subscription!`,
+            });
+          }
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "User not found",
+            text: `Could not find user information. Please try again later.`,
+          });
+        }
+        
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
@@ -55,16 +97,46 @@ const Login = () => {
            name: result.user?.displayName,
          };
          axiosPublic.post("/users", userInfo).then((res) => {
-           console.log(res.data);
-           Swal.fire({
-             icon: "success",
-             title: "Success!",
-             text: "You have registered successfully!",
-           });
-           navigate(location?.state ? location.state : "/");
-         });
+             console.log(res.data)
+                       
 
-         console.log(result.user);
+             
+          
+           navigate(location?.state ? location.state : "/");
+          });
+          
+          console.log(result.user.email);
+          const logedInUser = allUsers.find(user => user.email === result.user.email) 
+          console.log(logedInUser?.premiumTaken)
+         if (logedInUser) {
+           const premiumTokenExpirationDate = 
+             logedInUser?.premiumTaken
+           
+           const currentDate = new Date().toISOString();
+ console.log(currentDate);
+ console.log(premiumTokenExpirationDate);
+           if (currentDate > premiumTokenExpirationDate) {
+             Swal.fire({
+               icon: "warning",
+               title: "Subscription Expired",
+               text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
+             });
+           } else {
+             Swal.fire({
+               icon: "success",
+               title: "Success!",
+               text: `${result.user.email} have logged in successfully with an active subscription!`,
+             });
+           }
+         } else {
+           
+           Swal.fire({
+             icon: "error",
+             title: "User not found",
+             text: `Could not find user information. Please try again later.`,
+           });
+         }
+
       })
       .catch((error) => {
         Swal.fire({
@@ -75,6 +147,7 @@ const Login = () => {
         console.log(error.message);
       });
     console.log("Google mama  coming");
+    
   };
   return (
     <div>

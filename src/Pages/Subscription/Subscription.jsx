@@ -78,10 +78,18 @@ useEffect(() => {
                     className="select select-success w-[300px] md:w-[700px] text-black font-medium"
                   >
                     <option value="">Select Subscription Period</option>
-                    <option value="1min">1 Minute</option>
-                    <option value="5days">5 Days</option>
-                    <option value="1week">1 Week</option>
-                    <option value="1month">1 Month</option>
+                    <option value="1min">
+                      1 Minute <span className="text-lg text-red-500 ml-10">$5 </span>
+                    </option>
+                    <option value="5days">
+                      5 Days <span className="text-lg text-red-500">$100 </span>
+                    </option>
+                    <option value="1week">
+                      1 Week <span className="text-lg text-red-500">$500 </span>
+                    </option>
+                    <option value="1month">
+                      1 Month <span className="text-lg text-red-500">$1000 </span>
+                    </option>
                   </select>
                   <button
                     onClick={handleSubscribe}
