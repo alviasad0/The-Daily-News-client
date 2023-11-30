@@ -19,6 +19,7 @@ import AllUsers from './../Pages/Dashboard/DashBoardPages/AllUsers/AllUsers';
 import AdminHome from './../Pages/Dashboard/DashBoardPages/AdminHome/AdminHome';
 import AddPublisher from './../Pages/Dashboard/DashBoardPages/AddPublishers/AddPublisher';
 import PrivateRouter from "../PrivateRoute/PrivateRoute";
+import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
 
 export const router = createBrowserRouter([
   {
@@ -88,6 +89,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <Payment></Payment>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/paymentSuccess",
+        element: (
+          <PrivateRouter>
+            <PaymentSuccess></PaymentSuccess>
           </PrivateRouter>
         ),
       },

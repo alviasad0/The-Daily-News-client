@@ -41,7 +41,7 @@ const AddArticle = () => {
          imageHostingApi,
          imageFormData
        );
-
+       const currentTime = new Date().toLocaleString();
        const articleData = {
          title,
          author: user?.displayName,
@@ -52,6 +52,7 @@ const AddArticle = () => {
          premium,
          description,
          status: "pending",
+         posting_date: currentTime,
        };
 
       console.log("Article FormData:", articleData);

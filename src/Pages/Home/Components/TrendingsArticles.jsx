@@ -2,11 +2,20 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
+
 
 const TrendingsArticles = () => {
-  const [allArticles , setArticles] = useState([])
+  const [allArticles, setArticles] = useState([])
+     const [allUsers, setAllUsers] = useState([]);
+     const { user } = useContext(AuthContext);
+  console.log(user);
+  
+  const logedinUser = allUsers.find((users) => users?.email === user?.email);
+  console.log(logedinUser);
+
 
   console.log(allArticles);
     const sortedData = allArticles.sort((a, b) => b.totalViews - a.totalViews)
@@ -20,7 +29,14 @@ const TrendingsArticles = () => {
     fetch("http://localhost:5000/allArticles")
     .then(res=>res.json())
     .then(data=>setArticles(data))
-  },[])
+  }, [])
+  
+
+ useEffect(() => {
+   fetch("http://localhost:5000/users")
+     .then((res) => res.json())
+     .then((data) => setAllUsers(data));
+ }, []);
   return (
     <div className="mt-20 ">
       <h1 className="text-center text-black underline text-5xl font-bold pb-10 uppercase">
@@ -72,11 +88,22 @@ const TrendingsArticles = () => {
                   </p>
 
                   <div className="card-actions justify-end">
-                    <button className="btn btn-success tracking-widest  font-bold uppercase">
-                      <Link to={`/articlesDetails/${article._id}`}>
-                        View Details
-                      </Link>
-                    </button>
+                    {article.premium && !logedinUser?.premiumTaken ? (
+                      <button
+                        disabled
+                        className="btn btn-success tracking-widest  font-bold uppercase"
+                      >
+                        <Link to={`/articlesDetails/${article._id}`}>
+                          View Details
+                        </Link>
+                      </button>
+                    ) : (
+                      <button className="btn btn-success tracking-widest  font-bold uppercase">
+                        <Link to={`/articlesDetails/${article._id}`}>
+                          View Details
+                        </Link>
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

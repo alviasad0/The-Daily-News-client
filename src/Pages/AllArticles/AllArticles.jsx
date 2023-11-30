@@ -3,8 +3,9 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TbPremiumRights } from "react-icons/tb";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 
 
@@ -33,7 +34,17 @@ const AllArticles = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [allPublishers, setPublishers] = useState([]);
   
+  const [allUsers, setAllUsers] = useState([]);
+  const { user } = useContext(AuthContext);
+  console.log(user);
 
+  const logedinUser = allUsers.find((users) => users?.email === user?.email);
+  console.log(logedinUser);
+ useEffect(() => {
+   fetch("http://localhost:5000/users")
+     .then((res) => res.json())
+     .then((data) => setAllUsers(data));
+ }, []);
 
    const { data, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery({
      queryKey: ["articles"],
@@ -219,11 +230,22 @@ const AllArticles = () => {
                       )}
 
                       <div className="card-actions justify-end">
-                        <button className="btn btn-success tracking-widest  font-bold uppercase">
-                          <Link to={`/articlesDetails/${article._id}`}>
-                            View Details
-                          </Link>
-                        </button>
+                        {article.premium && !logedinUser?.premiumTaken ? (
+                          <button
+                            disabled
+                            className="btn btn-success tracking-widest  font-bold uppercase"
+                          >
+                            <Link to={`/articlesDetails/${article._id}`}>
+                              View Details
+                            </Link>
+                          </button>
+                        ) : (
+                          <button className="btn btn-success tracking-widest  font-bold uppercase">
+                            <Link to={`/articlesDetails/${article._id}`}>
+                              View Details
+                            </Link>
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>

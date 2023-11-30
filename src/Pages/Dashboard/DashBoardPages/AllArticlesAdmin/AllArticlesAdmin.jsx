@@ -346,7 +346,7 @@ const AllArticlesAdmin = () => {
                     )}
                   </td>
                   <th>
-                    {article.status === "approved" ? (
+                    {article.status === "approved" || article.status === "pending" ? (
                       <div>
                         {" "}
                         <button

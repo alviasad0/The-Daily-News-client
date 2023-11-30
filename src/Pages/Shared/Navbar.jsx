@@ -64,7 +64,8 @@ const Navbar = () => {
           Subscriptions
         </NavLink>
       </li>
-      <li className="text-lg font-medium">
+      {
+        logedInUser?.role === 'admin' ?  <li className="text-lg font-medium">
         <NavLink
           className={({ isActive }) =>
             isActive
@@ -75,7 +76,9 @@ const Navbar = () => {
         >
           Dashboard
         </NavLink>
-      </li>
+        </li> : 
+          ""
+     }
       <li className="text-lg font-medium">
         <NavLink
           className={({ isActive }) =>
@@ -88,7 +91,7 @@ const Navbar = () => {
           My Articles
         </NavLink>
       </li>
-      <li className="text-lg font-medium">
+      { logedInUser?.premiumTaken ?  <li className="text-lg font-medium">
         <NavLink
           className={({ isActive }) =>
             isActive
@@ -99,7 +102,8 @@ const Navbar = () => {
         >
           Premium Articles
         </NavLink>
-      </li>
+      </li> :
+      "" }
     </>
   );
   useEffect(() => {
@@ -112,6 +116,9 @@ const Navbar = () => {
         .then((res) => res.json())
         .then((data) => setAllUsers(data));
     }, []);
+
+
+   
 
   return (
     <div className="mx-auto max-w-screen-2xl ">
