@@ -1,5 +1,5 @@
 # Daily_News
-* client side live link : 
+* client side live link : https://courageous-duckanoo-35c292.netlify.app/
 
 
 
