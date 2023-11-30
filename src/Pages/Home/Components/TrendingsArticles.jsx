@@ -35,12 +35,15 @@ const TrendingsArticles = () => {
   }, []);
   return (
     <div className="mt-20 ">
-    
       <h1 className="text-center text-black underline text-5xl font-bold pb-10 uppercase">
-        <span className="text-main-blue-500">Most Tranding News </span> Our {""}
+        <span className="text-black font-bold">Daily news : </span> {""}
         <span className="mt-2">
           <Typewriter
-            words={["Trending News !!", "Affordable Price !!"]}
+            words={[
+              "Hot Picks",
+              " Trending News",
+              "  News Trends !!",
+            ]}
             loop={0 | false}
             cursor
             cursorStyle="_"

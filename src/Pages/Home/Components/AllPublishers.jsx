@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/UseAxiosPublic";
+import { Typewriter } from "react-simple-typewriter";
+
 
 
 const AllPublishers = () => {
@@ -21,8 +23,19 @@ const AllPublishers = () => {
 
   return (
     <div className="mt-20">
-      <h1 className="text-center text-5xl font-bold underline mb-10 text-black ">
-        The Publishers{" "}
+      <h1 className="text-center text-black underline text-5xl font-bold pb-10 uppercase">
+        <span className="text-black font-bold">daily news :</span> {""}
+        <span className="mt-2">
+          <Typewriter
+            words={["AllPublishers Insights", "Publisher's Palette"]}
+            loop={0 | false}
+            cursor
+            cursorStyle="_"
+            typeSpeed={30}
+            deleteSpeed={30}
+            delaySpeed={3000}
+          />
+        </span>
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {allPublishers.map((publishers) => (
