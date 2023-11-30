@@ -5,10 +5,12 @@ import Statics from "./Components/Statics";
 import Plans from "./Components/Plans";
 import Testimonials from "./Components/Testimonials";
 import FAQSection from "./Components/FAQSection";
+import HomepageModal from "./Components/HomepageModal";
 
 
 
 const Home = () => {
+  
   
     return (
       <div>
@@ -25,6 +27,7 @@ const Home = () => {
         <Plans></Plans>
         <Testimonials></Testimonials>
         <FAQSection></FAQSection>
+        <HomepageModal></HomepageModal>
       </div>
     );
 };
