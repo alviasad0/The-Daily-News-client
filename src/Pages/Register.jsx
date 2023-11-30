@@ -12,7 +12,7 @@ import useAxiosPublic from "../Hooks/UseAxiosPublic";
 
 const Register = () => {
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://the-daily-news-server-xi.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setAllUsers(data));
   }, []);
@@ -64,7 +64,7 @@ const Register = () => {
           name: name,
           email: email,
           role: "user",
-          image_url : userPic
+          image_url: userPic,
         };
         console.log(userInfo);
         axiosPublic.post("/users", userInfo).then((res) => {
@@ -98,53 +98,51 @@ const Register = () => {
   const handleGoogleLogin = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log(res.data);
+          //  Swal.fire({
+          //    icon: "success",
+          //    title: "Success!",
+          //    text: "You have registered successfully!",
+          //  });
+          navigate(location?.state ? location.state : "/");
+        });
 
-       const userInfo = {
-         email: result.user?.email,
-         name: result.user?.displayName,
-       };
-       axiosPublic.post("/users", userInfo).then((res) => {
-         console.log(res.data);
-        //  Swal.fire({
-        //    icon: "success",
-        //    title: "Success!",
-        //    text: "You have registered successfully!",
-        //  });
-         navigate(location?.state ? location.state : "/");
-       });
+        console.log(result.user.email);
+        const logedInUser = allUsers.find(
+          (user) => user.email === result.user.email
+        );
+        console.log(logedInUser?.premiumTaken);
+        if (logedInUser) {
+          const premiumTokenExpirationDate = logedInUser?.premiumTaken;
 
-
-         console.log(result.user.email);
-         const logedInUser = allUsers.find(
-           (user) => user.email === result.user.email
-         );
-         console.log(logedInUser?.premiumTaken);
-         if (logedInUser) {
-           const premiumTokenExpirationDate = logedInUser?.premiumTaken;
-
-           const currentDate = new Date().toISOString();
-           console.log(currentDate);
-           console.log(premiumTokenExpirationDate);
-           if (currentDate > premiumTokenExpirationDate) {
-             Swal.fire({
-               icon: "warning",
-               title: "Subscription Expired",
-               text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
-             });
-           } else {
-             Swal.fire({
-               icon: "success",
-               title: "Success!",
-               text: `${result.user.email} have logged in successfully with an active subscription!`,
-             });
-           }
-         } else {
-           Swal.fire({
-             icon: "error",
-             title: "User not found",
-             text: `Could not find user information. Please try again later.`,
-           });
-         }
+          const currentDate = new Date().toISOString();
+          console.log(currentDate);
+          console.log(premiumTokenExpirationDate);
+          if (currentDate > premiumTokenExpirationDate) {
+            Swal.fire({
+              icon: "warning",
+              title: "Subscription Expired",
+              text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
+            });
+          } else {
+            Swal.fire({
+              icon: "success",
+              title: "Success!",
+              text: `${result.user.email} have logged in successfully with an active subscription!`,
+            });
+          }
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "User not found",
+            text: `Could not find user information. Please try again later.`,
+          });
+        }
         console.log(result.user);
       })
       .catch((error) => {

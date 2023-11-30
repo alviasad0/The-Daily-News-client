@@ -1,22 +1,22 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Chart } from "react-google-charts";
 
 const PublicationPieChart = () => {
   const [publications, setPublications] = useState([]);
-    const [articles, setArticles] = useState([]);
-    
-    console.log(publications);
-    console.log(articles);
+  const [articles, setArticles] = useState([]);
+
+  console.log(publications);
+  console.log(articles);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allPublishers")
+      .get("https://the-daily-news-server-xi.vercel.app/allPublishers")
       .then((response) => setPublications(response.data))
       .catch((error) => console.error("Error fetching publications:", error));
 
     axios
-      .get("http://localhost:5000/allArticlesData")
+      .get("https://the-daily-news-server-xi.vercel.app/allArticlesData")
       .then((response) => setArticles(response.data))
       .catch((error) => console.error("Error fetching articles:", error));
   }, []);
@@ -30,7 +30,7 @@ const PublicationPieChart = () => {
         100,
     ])
   );
-   
+
   return (
     <Chart
       chartType="PieChart"
@@ -51,4 +51,3 @@ const PublicationPieChart = () => {
 };
 
 export default PublicationPieChart;
-

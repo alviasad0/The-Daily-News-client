@@ -6,37 +6,32 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 
-
 const TrendingsArticles = () => {
-  const [allArticles, setArticles] = useState([])
-     const [allUsers, setAllUsers] = useState([]);
-     const { user } = useContext(AuthContext);
+  const [allArticles, setArticles] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const { user } = useContext(AuthContext);
   console.log(user);
-  
+
   const logedinUser = allUsers.find((users) => users?.email === user?.email);
   console.log(logedinUser);
 
-
   console.log(allArticles);
-    const sortedData = allArticles.sort((a, b) => b.totalViews - a.totalViews)
+  const sortedData = allArticles.sort((a, b) => b.totalViews - a.totalViews);
 
-    const trendingsArticles = sortedData.slice(0, 6);
-    console.log(trendingsArticles)
-
-
+  const trendingsArticles = sortedData.slice(0, 6);
+  console.log(trendingsArticles);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allArticles")
-    .then(res=>res.json())
-    .then(data=>setArticles(data))
-  }, [])
-  
+    fetch("https://the-daily-news-server-xi.vercel.app/allArticles")
+      .then((res) => res.json())
+      .then((data) => setArticles(data));
+  }, []);
 
- useEffect(() => {
-   fetch("http://localhost:5000/users")
-     .then((res) => res.json())
-     .then((data) => setAllUsers(data));
- }, []);
+  useEffect(() => {
+    fetch("https://the-daily-news-server-xi.vercel.app/users")
+      .then((res) => res.json())
+      .then((data) => setAllUsers(data));
+  }, []);
   return (
     <div className="mt-20 ">
       <h1 className="text-center text-black underline text-5xl font-bold pb-10 uppercase">

@@ -8,16 +8,16 @@ import MyArticles from "../Pages/MyArticles/MyArticles";
 import Subscription from "../Pages/Subscription/Subscription";
 import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import MyProfile from './../Pages/MyProfile/MyProfile';
-import ArticlesDetails from './../Pages/ArticlesDetails/ArticlesDetails';
-import Payment from './../Pages/Payment/Payment';
+import MyProfile from "./../Pages/MyProfile/MyProfile";
+import ArticlesDetails from "./../Pages/ArticlesDetails/ArticlesDetails";
+import Payment from "./../Pages/Payment/Payment";
 import AddArticles from "../Pages/AddArticles";
-import UserArticleUpdate from './../Pages/MyArticles/Components/UserArticleUpdate';
-import AllArticlesAdmin from './../Pages/Dashboard/DashBoardPages/AllArticlesAdmin/AllArticlesAdmin';
-import Dashboard from './../Layout/Dashboard';
-import AllUsers from './../Pages/Dashboard/DashBoardPages/AllUsers/AllUsers';
-import AdminHome from './../Pages/Dashboard/DashBoardPages/AdminHome/AdminHome';
-import AddPublisher from './../Pages/Dashboard/DashBoardPages/AddPublishers/AddPublisher';
+import UserArticleUpdate from "./../Pages/MyArticles/Components/UserArticleUpdate";
+import AllArticlesAdmin from "./../Pages/Dashboard/DashBoardPages/AllArticlesAdmin/AllArticlesAdmin";
+import Dashboard from "./../Layout/Dashboard";
+import AllUsers from "./../Pages/Dashboard/DashBoardPages/AllUsers/AllUsers";
+import AdminHome from "./../Pages/Dashboard/DashBoardPages/AdminHome/AdminHome";
+import AddPublisher from "./../Pages/Dashboard/DashBoardPages/AddPublishers/AddPublisher";
 import PrivateRouter from "../PrivateRoute/PrivateRoute";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
 
@@ -108,13 +108,17 @@ export const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/allArticles/${params._id}`),
+          fetch(
+            `https://the-daily-news-server-xi.vercel.app/allArticles/${params._id}`
+          ),
       },
       {
         path: `articleUpdate/:_id`,
         element: <UserArticleUpdate></UserArticleUpdate>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/allArticles/${params._id}`),
+          fetch(
+            `https://the-daily-news-server-xi.vercel.app/allArticles/${params._id}`
+          ),
       },
     ],
   },
@@ -147,4 +151,3 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-

@@ -9,18 +9,18 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const AddArticle = () => {
   const [title, setTitle] = useState("");
- 
+
   const [image, setImage] = useState(null);
   const [publisherOptions, setPublisherOptions] = useState([]);
   const [selectedPublisher, setSelectedPublisher] = useState(null);
   const [selectedTags, setSelectedTags] = useState([]);
   const [premium, setPremium] = useState(false);
   const [description, setDescription] = useState("");
-    const { user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allPublishers")
+      .get("https://the-daily-news-server-xi.vercel.app/allPublishers")
       .then((response) => {
         const options = response.data.map((publisher) => ({
           value: publisher.name,
@@ -35,29 +35,29 @@ const AddArticle = () => {
     e.preventDefault();
 
     try {
-       const imageFormData = new FormData();
-       imageFormData.append("image", image);
-       const imageUploadResponse = await axios.post(
-         imageHostingApi,
-         imageFormData
-       );
-       const currentTime = new Date().toLocaleString();
-       const articleData = {
-         title,
-         author: user?.displayName,
-         author_photoURL: user?.photoURL,
-         image: imageUploadResponse.data.data.display_url,
-         publisher: selectedPublisher.value,
-         tags: selectedTags.map((tag) => tag.value),
-         premium,
-         description,
-         status: "pending",
-         posting_date: currentTime,
-       };
+      const imageFormData = new FormData();
+      imageFormData.append("image", image);
+      const imageUploadResponse = await axios.post(
+        imageHostingApi,
+        imageFormData
+      );
+      const currentTime = new Date().toLocaleString();
+      const articleData = {
+        title,
+        author: user?.displayName,
+        author_photoURL: user?.photoURL,
+        image: imageUploadResponse.data.data.display_url,
+        publisher: selectedPublisher.value,
+        tags: selectedTags.map((tag) => tag.value),
+        premium,
+        description,
+        status: "pending",
+        posting_date: currentTime,
+      };
 
       console.log("Article FormData:", articleData);
       const articleSubmissionResponse = await axios.post(
-        "http://localhost:5000/allArticlesData",
+        "https://the-daily-news-server-xi.vercel.app/allArticlesData",
         articleData,
         {
           headers: {
@@ -65,11 +65,11 @@ const AddArticle = () => {
           },
         }
       );
-         console.log("Article FormData:", articleData);
-         console.log(
-           "Article submission response:",
-           articleSubmissionResponse.data
-         );
+      console.log("Article FormData:", articleData);
+      console.log(
+        "Article submission response:",
+        articleSubmissionResponse.data
+      );
 
       if (articleSubmissionResponse.data.insertedId) {
         Swal.fire({
@@ -84,7 +84,7 @@ const AddArticle = () => {
           articleSubmissionResponse.data
         );
       }
-    //   console.log(articleFormData);
+      //   console.log(articleFormData);
     } catch (error) {
       console.error("Error adding article", error);
     }

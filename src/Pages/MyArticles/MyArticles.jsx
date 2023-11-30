@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { RiDeleteBin6Fill  } from "react-icons/ri";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
@@ -17,7 +17,6 @@ const MyArticles = () => {
   console.log(allDeclinedMessages);
   console.log(response);
 
-  
   const myArticels = allArticles.filter(
     (article) => article.author === user?.displayName
   );
@@ -35,9 +34,12 @@ const MyArticles = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/allArticles/${article._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://the-daily-news-server-xi.vercel.app/allArticles/${article._id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
@@ -57,20 +59,22 @@ const MyArticles = () => {
     });
   };
 
-  const handleShowDeclinedMessage = id => {
+  const handleShowDeclinedMessage = (id) => {
     console.log(id);
-    const declinedMessage = allDeclinedMessages.find(message=> message.article_id === id)
+    const declinedMessage = allDeclinedMessages.find(
+      (message) => message.article_id === id
+    );
     console.log(declinedMessage.response);
     setResponse(declinedMessage.response);
-  }
+  };
 
   useEffect(() => {
-    fetch("http://localhost:5000/allArticlesData")
+    fetch("https://the-daily-news-server-xi.vercel.app/allArticlesData")
       .then((res) => res.json())
       .then((data) => setAllArticles(data));
   }, [user]);
   useEffect(() => {
-    fetch("http://localhost:5000/declinedMessages")
+    fetch("https://the-daily-news-server-xi.vercel.app/declinedMessages")
       .then((res) => res.json())
       .then((data) => setAllDeclinedMessages(data));
   }, []);

@@ -4,16 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
 
-
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 import auth from "../Firebase/firebase.config";
 import { Helmet } from "react-helmet";
 import useAxiosPublic from "../Hooks/UseAxiosPublic";
 
-
-const Login =  () => {
- 
+const Login = () => {
   const [allUsers, setAllUsers] = useState([]);
   const googleProvider = new GoogleAuthProvider();
   const location = useLocation();
@@ -22,38 +19,32 @@ const Login =  () => {
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://the-daily-news-server-xi.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setAllUsers(data));
   }, []);
 
-    
-  
-  
-
   const { logIn } = useContext(AuthContext);
 
-  const handleLogin =async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
     try {
+      const result = await logIn(email, password);
 
-      const result = await logIn(email, password)
-      
       Swal.fire({
         icon: "success",
         title: "Success!",
         text: `${result.user.email} have logged in successfully!`,
       });
-        
+
       console.log(result);
       console.log(result.user.email);
       const logedInUser = allUsers.find(
         (user) => user.email === result.user.email
       );
       console.log(logedInUser?.premiumTaken);
-
 
       if (logedInUser) {
         const premiumTokenExpirationDate = logedInUser?.premiumTaken;
@@ -62,15 +53,12 @@ const Login =  () => {
         console.log(currentDate);
         console.log(premiumTokenExpirationDate);
 
-
         if (currentDate > premiumTokenExpirationDate) {
           Swal.fire({
             icon: "warning",
             title: "Subscription Expired",
             text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
           });
-
-
 
           const userData = {
             name: logedInUser.name,
@@ -83,15 +71,15 @@ const Login =  () => {
           console.log("Sending data to server:", userData);
 
           try {
-            const response = await fetch(`http://localhost:5000/users/${logedInUser._id}`, {
-              method: "PUT",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(userData),
-            });
+            const response = await fetch(
+              `https://the-daily-news-server-xi.vercel.app/users/${logedInUser._id}`,
+              {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(userData),
+              }
+            );
             const data = await response.json();
-
-   
-
 
             console.log("Response from server:", data);
 
@@ -103,7 +91,6 @@ const Login =  () => {
                     : user
                 )
               );
-        
 
               Swal.fire(
                 "Good job!",
@@ -111,7 +98,11 @@ const Login =  () => {
                 "success"
               );
             } else {
-              Swal.fire("Error!", "Failed to update user subscription!", "error");
+              Swal.fire(
+                "Error!",
+                "Failed to update user subscription!",
+                "error"
+              );
             }
           } catch (error) {
             console.error("Error during fetch:", error);
@@ -135,7 +126,7 @@ const Login =  () => {
           text: `Could not find user information. Please try again later.`,
         });
       }
-        
+
       navigate(location?.state ? location.state : "/");
     } catch (error) {
       Swal.fire({
@@ -145,60 +136,54 @@ const Login =  () => {
       });
       console.log(error.message);
     }
-
-}
+  };
 
   /* google login */
   const handleGoogleLogin = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        const userInfo = {
-          email: result.user?.email,
-          name: result.user?.displayName,
-        };
-        axiosPublic.post("/users", userInfo).then((res) => {
-          console.log(res.data)
-                       
+    signInWithPopup(auth, googleProvider).then((result) => {
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+      };
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res.data);
 
-             
-          
-          navigate(location?.state ? location.state : "/");
-        });
-          
-        console.log(result.user.email);
-        const logedInUser = allUsers.find(user => user.email === result.user.email)
-        console.log(logedInUser?.premiumTaken)
-        if (logedInUser) {
-          const premiumTokenExpirationDate =
-            logedInUser?.premiumTaken
-           
-          const currentDate = new Date().toISOString();
-          console.log(currentDate);
-          console.log(premiumTokenExpirationDate);
-          if (currentDate > premiumTokenExpirationDate) {
-            Swal.fire({
-              icon: "warning",
-              title: "Subscription Expired",
-              text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
-            });
-          } else {
-            Swal.fire({
-              icon: "success",
-              title: "Success!",
-              text: `${result.user.email} have logged in successfully with an active subscription!`,
-            });
-          }
-        } else {
-           
+        navigate(location?.state ? location.state : "/");
+      });
+
+      console.log(result.user.email);
+      const logedInUser = allUsers.find(
+        (user) => user.email === result.user.email
+      );
+      console.log(logedInUser?.premiumTaken);
+      if (logedInUser) {
+        const premiumTokenExpirationDate = logedInUser?.premiumTaken;
+
+        const currentDate = new Date().toISOString();
+        console.log(currentDate);
+        console.log(premiumTokenExpirationDate);
+        if (currentDate > premiumTokenExpirationDate) {
           Swal.fire({
-            icon: "error",
-            title: "User not found",
-            text: `Could not find user information. Please try again later.`,
+            icon: "warning",
+            title: "Subscription Expired",
+            text: `${result.user.email} have logged in, but the subscription has expired. Please renew your subscription.`,
+          });
+        } else {
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: `${result.user.email} have logged in successfully with an active subscription!`,
           });
         }
-
-      })
-  }
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "User not found",
+          text: `Could not find user information. Please try again later.`,
+        });
+      }
+    });
+  };
   return (
     <div>
       <Helmet>

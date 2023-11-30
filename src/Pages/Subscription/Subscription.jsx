@@ -20,7 +20,7 @@ const Subscription = () => {
       return;
     }
 
-    await fetch("http://localhost:5000/subscribe", {
+    await fetch("https://the-daily-news-server-xi.vercel.app/subscribe", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const Subscription = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://the-daily-news-server-xi.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setAllUsers(data));
   }, []);
@@ -64,13 +64,13 @@ const Subscription = () => {
       value: "1week",
       label: "1 Week",
       details: "Access all content for 1 week and stay updated!",
-      color: "#90EE90", 
+      color: "#90EE90",
     },
     {
       value: "1month",
       label: "1 Month",
       details: "Subscribe for a month and experience our premium content!",
-      color: "#FFA07A", 
+      color: "#FFA07A",
     },
   ];
 

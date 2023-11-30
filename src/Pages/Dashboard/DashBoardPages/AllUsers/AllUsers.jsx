@@ -1,4 +1,3 @@
-
 import { useContext, useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from "sweetalert2";
@@ -9,96 +8,88 @@ const AllUsers = () => {
   const { user } = useContext(AuthContext);
   console.log(user);
 
-  const handleMakeAdmin = async(user) => {
-      
-      
- console.log(user);
+  const handleMakeAdmin = async (user) => {
+    console.log(user);
     const userData = {
       name: user.name,
       role: "admin",
       email: user.email,
-      image_url: user.image_url
+      image_url: user.image_url,
     };
 
     console.log("Sending data to server:", userData);
 
     try {
-      const response = await fetch(`http://localhost:5000/users/${user._id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        `https://the-daily-news-server-xi.vercel.app/users/${user._id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
 
       const data = await response.json();
 
       console.log("Response from server:", data);
 
       if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
-        const updatedUserInfo = await fetch("http://localhost:5000/users");
+        const updatedUserInfo = await fetch(
+          "https://the-daily-news-server-xi.vercel.app/users"
+        );
         const updatedUserData = await updatedUserInfo.json();
 
         setAllUsers(updatedUserData);
-        
 
-        Swal.fire(
-          "Good job!",
-          "USer has made admin !",
-          "success"
-        );
+        Swal.fire("Good job!", "USer has made admin !", "success");
       } else {
-        Swal.fire(
-          "Error!",
-          "Failed to make admin !",
-          "error"
-        );
+        Swal.fire("Error!", "Failed to make admin !", "error");
       }
     } catch (error) {
       console.error("Error during fetch:", error);
-      Swal.fire("Error!", "Failed to make  user to admin  in the database", "error");
+      Swal.fire(
+        "Error!",
+        "Failed to make  user to admin  in the database",
+        "error"
+      );
     }
   };
-  const handleRemoveAdmin = async(user) => {
-      
-      
- console.log(user);
+  const handleRemoveAdmin = async (user) => {
+    console.log(user);
     const userData = {
       name: user.name,
       role: "user",
       email: user.email,
-      image_url: user.image_url
+      image_url: user.image_url,
     };
 
     console.log("Sending data to server:", userData);
 
     try {
-      const response = await fetch(`http://localhost:5000/users/${user._id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        `https://the-daily-news-server-xi.vercel.app/users/${user._id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
 
       const data = await response.json();
 
       console.log("Response from server:", data);
 
       if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
-        const updatedUserInfo = await fetch("http://localhost:5000/users");
+        const updatedUserInfo = await fetch(
+          "https://the-daily-news-server-xi.vercel.app/users"
+        );
         const updatedUserData = await updatedUserInfo.json();
 
         setAllUsers(updatedUserData);
-        
 
-        Swal.fire(
-          "Good job!",
-          "Admin has made user !",
-          "success"
-        );
+        Swal.fire("Good job!", "Admin has made user !", "success");
       } else {
-        Swal.fire(
-          "Error!",
-          "Failed to make user !",
-          "error"
-        );
+        Swal.fire("Error!", "Failed to make user !", "error");
       }
     } catch (error) {
       console.error("Error during fetch:", error);
@@ -111,43 +102,42 @@ const AllUsers = () => {
   };
 
   const handleDelete = (id) => {
-     console.log(id);
-     Swal.fire({
-       title: "Are you sure?",
-       text: "Remove from the cart !!",
-       icon: "warning",
-       showCancelButton: true,
-       confirmButtonColor: "#3085d6",
-       cancelButtonColor: "#d33",
-       confirmButtonText: "Yes, delete it!",
-     }).then((result) => {
-       if (result.isConfirmed) {
-         fetch(`http://localhost:5000/users/${id}`, {
-           method: "DELETE",
-         })
-           .then((response) => response.json())
-           .then((data) => {
-             console.log(data);
-               if (data.deletedCount > 0) {
-                 setAllUsers((prevUsers) =>
-                   prevUsers.filter((user) => user._id !== id)
-                 )
-               Swal.fire(
-                 "Good job!",
-                 "User has deleted from  the database!",
-                 "success"
-               );
-             }
-           });
-       }
-     });
-      
-    };
-    useEffect(() => {
-      fetch("http://localhost:5000/users")
-        .then((res) => res.json())
-        .then((data) => setAllUsers(data));
-    }, []);
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Remove from the cart !!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://the-daily-news-server-xi.vercel.app/users/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              setAllUsers((prevUsers) =>
+                prevUsers.filter((user) => user._id !== id)
+              );
+              Swal.fire(
+                "Good job!",
+                "User has deleted from  the database!",
+                "success"
+              );
+            }
+          });
+      }
+    });
+  };
+  useEffect(() => {
+    fetch("https://the-daily-news-server-xi.vercel.app/users")
+      .then((res) => res.json())
+      .then((data) => setAllUsers(data));
+  }, []);
   return (
     <div>
       <div className="overflow-x-auto">

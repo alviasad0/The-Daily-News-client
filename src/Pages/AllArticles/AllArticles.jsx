@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
- import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
@@ -7,89 +7,79 @@ import { useContext, useEffect, useState } from "react";
 import { TbPremiumRights } from "react-icons/tb";
 import { AuthContext } from "../../Providers/AuthProvider";
 
-
-
-const getArticles = async ({ pageParam = 0 ,searchTitle, publisher, tags }) => {
-
-   const queryParams = new URLSearchParams({
-     limit: 10,
-     offset: pageParam,
-     searchTitle,
-     publisher,
-     tags,
-   });
+const getArticles = async ({ pageParam = 0, searchTitle, publisher, tags }) => {
+  const queryParams = new URLSearchParams({
+    limit: 10,
+    offset: pageParam,
+    searchTitle,
+    publisher,
+    tags,
+  });
   const res = await fetch(
-    `http://localhost:5000/searchArticles?${queryParams}`
+    `https://the-daily-news-server-xi.vercel.app/searchArticles?${queryParams}`
   );
   const data = await res.json();
 
   return { data, prevOffset: pageParam };
 };
 
-
 const AllArticles = () => {
-    
-   const [searchTitle, setSearchTitle] = useState("");
-   const [selectedPublisher, setSelectedPublisher] = useState("");
+  const [searchTitle, setSearchTitle] = useState("");
+  const [selectedPublisher, setSelectedPublisher] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
   const [allPublishers, setPublishers] = useState([]);
-  
+
   const [allUsers, setAllUsers] = useState([]);
   const { user } = useContext(AuthContext);
   console.log(user);
 
   const logedinUser = allUsers.find((users) => users?.email === user?.email);
   console.log(logedinUser);
- useEffect(() => {
-   fetch("http://localhost:5000/users")
-     .then((res) => res.json())
-     .then((data) => setAllUsers(data));
- }, []);
+  useEffect(() => {
+    fetch("https://the-daily-news-server-xi.vercel.app/users")
+      .then((res) => res.json())
+      .then((data) => setAllUsers(data));
+  }, []);
 
-   const { data, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery({
-     queryKey: ["articles"],
-     queryFn: ({ pageParam }) =>
-       getArticles({
-         pageParam,
-         searchTitle,
-         publisher: selectedPublisher,
-         tags: selectedTags.join(",") ||[],
-       }),
-     getNextPageParam: (lastPage, allPages) => {
-       console.log(allPages);
+  const { data, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery({
+    queryKey: ["articles"],
+    queryFn: ({ pageParam }) =>
+      getArticles({
+        pageParam,
+        searchTitle,
+        publisher: selectedPublisher,
+        tags: selectedTags.join(",") || [],
+      }),
+    getNextPageParam: (lastPage, allPages) => {
+      console.log(allPages);
 
-       if (lastPage.prevOffset + 10 > lastPage.articlesCount) {
-         
-         return false;
-       }
-       return lastPage.prevOffset + 10;
-     },
-   });
+      if (lastPage.prevOffset + 10 > lastPage.articlesCount) {
+        return false;
+      }
+      return lastPage.prevOffset + 10;
+    },
+  });
   console.log(data);
-  
 
-
-
-   const articles = data?.pages
-     .reduce((acc, page) => {
-       console.log(page?.data);
-       return [...acc, ...(page?.data || [])];
-     }, [])
-     .filter((article) => article.status === "approved");
+  const articles = data?.pages
+    .reduce((acc, page) => {
+      console.log(page?.data);
+      return [...acc, ...(page?.data || [])];
+    }, [])
+    .filter((article) => article.status === "approved");
   console.log(hasNextPage);
-
 
   const handleSearchChange = (searchTerm) => {
     setSearchTitle(searchTerm);
-    
+
     refetch();
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/allPublishers")
+    fetch("https://the-daily-news-server-xi.vercel.app/allPublishers")
       .then((res) => res.json())
       .then((data) => setPublishers(data));
-  },[])
+  }, []);
   console.log(allPublishers);
 
   return (

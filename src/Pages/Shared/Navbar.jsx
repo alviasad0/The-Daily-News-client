@@ -1,18 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { themeChange } from 'theme-change';
+import { themeChange } from "theme-change";
 import { AuthContext } from "../../Providers/AuthProvider";
 
-
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
-    console.log(user);
-       const [allUsers, setAllUsers] = useState([]);
-    const logedInUser = allUsers.find((User) => User.email === user?.email);
-    console.log(logedInUser);
-   
-
-    
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
+  const [allUsers, setAllUsers] = useState([]);
+  const logedInUser = allUsers.find((User) => User.email === user?.email);
+  console.log(logedInUser);
 
   const links = (
     <>
@@ -64,21 +60,22 @@ const Navbar = () => {
           Subscriptions
         </NavLink>
       </li>
-      {
-        logedInUser?.role === 'admin' ?  <li className="text-lg font-medium">
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? `text-green-600 border-green-800 underline border-2`
-              : "text-green-600"
-          }
-          to="/dashboard"
-        >
-          Dashboard
-        </NavLink>
-        </li> : 
-          ""
-     }
+      {logedInUser?.role === "admin" ? (
+        <li className="text-lg font-medium">
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? `text-green-600 border-green-800 underline border-2`
+                : "text-green-600"
+            }
+            to="/dashboard"
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      ) : (
+        ""
+      )}
       <li className="text-lg font-medium">
         <NavLink
           className={({ isActive }) =>
@@ -91,34 +88,33 @@ const Navbar = () => {
           My Articles
         </NavLink>
       </li>
-      { logedInUser?.premiumTaken ?  <li className="text-lg font-medium">
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? `text-green-600 border-green-800 underline border-2`
-              : "text-green-600"
-          }
-          to="/premiumArticles"
-        >
-          Premium Articles
-        </NavLink>
-      </li> :
-      "" }
+      {logedInUser?.premiumTaken ? (
+        <li className="text-lg font-medium">
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? `text-green-600 border-green-800 underline border-2`
+                : "text-green-600"
+            }
+            to="/premiumArticles"
+          >
+            Premium Articles
+          </NavLink>
+        </li>
+      ) : (
+        ""
+      )}
     </>
   );
   useEffect(() => {
     themeChange(false);
-    
   }, []);
 
-    useEffect(() => {
-      fetch("http://localhost:5000/users")
-        .then((res) => res.json())
-        .then((data) => setAllUsers(data));
-    }, []);
-
-
-   
+  useEffect(() => {
+    fetch("https://the-daily-news-server-xi.vercel.app/users")
+      .then((res) => res.json())
+      .then((data) => setAllUsers(data));
+  }, []);
 
   return (
     <div className="mx-auto max-w-screen-2xl ">

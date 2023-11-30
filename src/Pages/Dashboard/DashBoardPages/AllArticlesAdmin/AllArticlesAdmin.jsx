@@ -9,37 +9,38 @@ const AllArticlesAdmin = () => {
   console.log(allArticles);
 
   const handleDelete = (id) => {
-      console.log(id);
-      Swal.fire({
-          title: "Are you sure?",
-          text: "Remove from the cart !!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-          if (result.isConfirmed) {
-              fetch(`http://localhost:5000/allArticlesData/${id}`, {
-                method: "DELETE",
-              })
-                .then((response) => response.json())
-                .then((data) => {
-                  console.log(data);
-                  if (data.deletedCount > 0) {
-                    Swal.fire(
-                      "Good job!",
-                      "Product has deleted from  the database!",
-                      "success"
-                    );
-                  }
-                });
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Remove from the cart !!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(
+          `https://the-daily-news-server-xi.vercel.app/allArticlesData/${id}`,
+          {
+            method: "DELETE",
           }
-          
-      })
-      
-    };
-  const handlePremium = async(article) => {
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire(
+                "Good job!",
+                "Product has deleted from  the database!",
+                "success"
+              );
+            }
+          });
+      }
+    });
+  };
+  const handlePremium = async (article) => {
     console.log(article);
     const articleData = {
       title: article.title,
@@ -58,7 +59,7 @@ const AllArticlesAdmin = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/allArticlesData/${article._id}`,
+        `https://the-daily-news-server-xi.vercel.app/allArticlesData/${article._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -72,7 +73,7 @@ const AllArticlesAdmin = () => {
 
       if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
         const updatedArticlesResponse = await fetch(
-          "http://localhost:5000/allArticlesData"
+          "https://the-daily-news-server-xi.vercel.app/allArticlesData"
         );
         const updatedArticlesData = await updatedArticlesResponse.json();
 
@@ -114,7 +115,7 @@ const AllArticlesAdmin = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/allArticlesData/${article._id}`,
+        `https://the-daily-news-server-xi.vercel.app/allArticlesData/${article._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -128,7 +129,7 @@ const AllArticlesAdmin = () => {
 
       if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
         const updatedArticlesResponse = await fetch(
-          "http://localhost:5000/allArticlesData"
+          "https://the-daily-news-server-xi.vercel.app/allArticlesData"
         );
         const updatedArticlesData = await updatedArticlesResponse.json();
 
@@ -159,7 +160,7 @@ const AllArticlesAdmin = () => {
     };
     console.log(declinedMessage);
     const declinedMessageSubmissionResponse = await axios.post(
-      "http://localhost:5000/declinedMessages",
+      "https://the-daily-news-server-xi.vercel.app/declinedMessages",
       declinedMessage,
       {
         headers: {
@@ -198,7 +199,7 @@ const AllArticlesAdmin = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:5000/allArticlesData/${article._id}`,
+          `https://the-daily-news-server-xi.vercel.app/allArticlesData/${article._id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -212,7 +213,7 @@ const AllArticlesAdmin = () => {
 
         if (data.modifiedCount !== undefined && data.modifiedCount > 0) {
           const updatedArticlesResponse = await fetch(
-            "http://localhost:5000/allArticlesData"
+            "https://the-daily-news-server-xi.vercel.app/allArticlesData"
           );
           const updatedArticlesData = await updatedArticlesResponse.json();
 
@@ -247,16 +248,16 @@ const AllArticlesAdmin = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/allArticlesData")
+    fetch("https://the-daily-news-server-xi.vercel.app/allArticlesData")
       .then((res) => res.json())
       .then((data) => setAllArticles(data));
   }, []);
-    
-     useEffect(() => {
-       fetch("http://localhost:5000/allArticlesData")
-         .then((res) => res.json())
-         .then((data) => setAllArticles(data));
-     }, [allArticles]);
+
+  useEffect(() => {
+    fetch("https://the-daily-news-server-xi.vercel.app/allArticlesData")
+      .then((res) => res.json())
+      .then((data) => setAllArticles(data));
+  }, [allArticles]);
   return (
     <div>
       <div>
@@ -346,7 +347,8 @@ const AllArticlesAdmin = () => {
                     )}
                   </td>
                   <th>
-                    {article.status === "approved" || article.status === "pending" ? (
+                    {article.status === "approved" ||
+                    article.status === "pending" ? (
                       <div>
                         {" "}
                         <button
