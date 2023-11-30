@@ -1,16 +1,23 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../Hooks/UseAxiosPublic";
 
 
 const AllPublishers = () => {
-  const [allPublishers, setAllPublishers] = useState([]);
+    const axiosPublic = useAxiosPublic();
+  const { data: allPublishers = [] } = useQuery({
+    queryKey: ["allPublishers"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/allPublishers");
+      return res.data;
+       
+
+    }
+  })
+  
+
 
   console.log(allPublishers);
 
-  useEffect(() => {
-    fetch("https://the-daily-news-server-xi.vercel.app/allPublishers")
-      .then((res) => res.json())
-      .then((data) => setAllPublishers(data));
-  }, []);
 
   return (
     <div className="mt-20">

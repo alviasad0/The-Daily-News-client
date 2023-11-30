@@ -5,6 +5,7 @@ import { Pagination } from "swiper/modules";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import { Typewriter } from "react-simple-typewriter";
 
 const TrendingsArticles = () => {
   const [allArticles, setArticles] = useState([]);
@@ -34,8 +35,20 @@ const TrendingsArticles = () => {
   }, []);
   return (
     <div className="mt-20 ">
+    
       <h1 className="text-center text-black underline text-5xl font-bold pb-10 uppercase">
-        Most Tranding News{" "}
+        <span className="text-main-blue-500">Most Tranding News </span> Our {""}
+        <span className="mt-2">
+          <Typewriter
+            words={["Trending News !!", "Affordable Price !!"]}
+            loop={0 | false}
+            cursor
+            cursorStyle="_"
+            typeSpeed={30}
+            deleteSpeed={30}
+            delaySpeed={3000}
+          />
+        </span>
       </h1>
       <Swiper
         slidesPerView={3}

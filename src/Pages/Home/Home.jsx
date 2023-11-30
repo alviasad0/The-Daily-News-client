@@ -8,7 +8,6 @@ import FAQSection from "./Components/FAQSection";
 
 
 
-
 const Home = () => {
   
     return (
