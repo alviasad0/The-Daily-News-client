@@ -3,9 +3,22 @@ import { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from "sweetalert2";
 
+
+
+const ITEMS_PER_PAGE = 10;
+
 const AllArticlesAdmin = () => {
   const [allArticles, setAllArticles] = useState([]);
   const [response, setResponse] = useState("");
+   const [currentPage, setCurrentPage] = useState(1);
+
+    const indexOfLastArticle = currentPage * ITEMS_PER_PAGE;
+    const indexOfFirstArticle = indexOfLastArticle - ITEMS_PER_PAGE;
+    const currentArticles = allArticles.slice(
+      indexOfFirstArticle,
+      indexOfLastArticle
+  );
+   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   console.log(allArticles);
 
   const handleDelete = (id) => {
@@ -286,7 +299,7 @@ const AllArticlesAdmin = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {allArticles.map((article) => (
+              {currentArticles.map((article) => (
                 <tr key={article?._id}>
                   <th>
                     <RiDeleteBin6Line
@@ -396,6 +409,24 @@ const AllArticlesAdmin = () => {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="flex justify-center mt-4">
+          {Array.from(
+            { length: Math.ceil(allArticles.length / ITEMS_PER_PAGE) },
+            (_, index) => (
+              <button
+                key={index}
+                onClick={() => paginate(index + 1)}
+                className={`mx-1 px-3 py-2 rounded-full ${
+                  currentPage === index + 1
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200"
+                }`}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
         </div>
       </div>
     </div>
