@@ -3,6 +3,8 @@ import TrendingsArticles from "./Components/TrendingsArticles";
 import AllPublishers from "./Components/AllPublishers";
 import Statics from "./Components/Statics";
 import Plans from "./Components/Plans";
+import Testimonials from "./Components/Testimonials";
+import FAQSection from "./Components/FAQSection";
 
 
 
@@ -22,6 +24,8 @@ const Home = () => {
         <Statics></Statics>
 
         <Plans></Plans>
+        <Testimonials></Testimonials>
+        <FAQSection></FAQSection>
       </div>
     );
 };
