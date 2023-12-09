@@ -6,26 +6,36 @@
 
 ---------------------------------
 # Some  features 
-* MongoDB : I have used mongodb as a database in my website . So that my website has its own        database . I can store the data in the database . No fake json data used in the whole website . You can add data in the database through the website . 
+* Admin Panel:
+  
+  The website boasts a robust admin panel, providing administrators with powerful tools to manage and curate content effectively.
+   Admins have the ability to add, edit, and remove articles seamlessly, ensuring the website stays up-to-date with the latest news.
+* User Management:
 
-* Express : I have used Express in the website. So i have a own server in my website . For this a can access the mondb and the website with this express .
+Daily News incorporates advanced user management features, allowing admins to designate other users as admins, block users, or remove admin privileges.
+Admins can add publishers to diversify the sources of news, enriching the content available on the platform.
+* Article Premium Status:
 
-* Authentication : I have used Firebase in the website . For this a can  authenticate users . there are two ways to authenticate users with Firebase in my website . you can log in with google  and sing in and register in the website with email and passowrd . 
+Admins can enhance the visibility of specific articles by marking them as premium, ensuring they stand out to users.
+This feature allows for strategic content placement and monetization opportunities.
+* Smooth Authentication:
 
-* AOS : AOS is an animation library . I have used AOS in the website . For this i used many animation in the website . those animations made my website so cool and awesome . 
+ The authentication process is seamless, providing users with a hassle-free login and registration experience.
+Admins can efficiently manage user authentication and ensure a secure environment for both readers and contributors.
+* Admin Home:
 
+The admin dashboard provides a centralized hub for monitoring and managing various aspects of the website.
+Admins can access key metrics, user statistics, and vital information, facilitating data-driven decisions.
+* Pagination:
 
-* Private Routes : I have used private routes in my website . Thats mean you have to log in before you want go to somw routes . Like single  details page , add Packages page , my schedules  . If you want to any of these page , you must have to log in first .  
+Pagination is implemented to enhance the user experience, making it easier for readers to navigate through a large volume of news articles.
+Users can seamlessly explore different pages and discover a diverse range of news content.
+* React Swiper for Trending News:
 
+The website features a dedicated section for trending news, showcasing the six most viewed articles.
+React Swiper adds a dynamic touch, allowing users to effortlessly swipe through the trending news for a visually engaging experience.
+*  User Roles and Permissions:
 
-
-* Dynamic Title  : The website has dynamic title fetures included . At the home page in the website , the tittle will be World_Tour | Home . Then if you  go to the log in page , the website tittle will be changed to World_Tour | Login . Like the login page , in this website any route you clicked and go , the website tittle will be change according to the route name .
-
-
-* CURD operations : The website backend side is mostly coded with CURD operations. As you know , CRUD operations are used to get or post or update or delete data from the databse by server . All data are that are showing are from the mongodb databse which are get methods used to get those data. In the Add Packages section you can add packages. Which is a create operation . i have used post to create those data in the databse . In the  my package page there are 2 button, one is update and another is delete . the function of update button eas coded with patch and delete button function was coded with delete method.
-
-* environment variables : The environment variables are used to configure the backend server user credentials like mongodb batabase username and password and the firebase configs are  keep safe . i have installed dotenv in my both backend and the frontend side . for this i have made the website credentials little much safer and they are not now pushed in github .
-
-* React Simple TypeWritter : I have uesd react-simple-typeWritter in the banner section . Which made the website more attractive.
-
-* React Framer Motion : I have used React Framer Motion in the website . Mainly in the home page there is a scrollBar on the top of the screen . It has made the website more atractive .  
+The website incorporates a sophisticated role-based access control system, allowing admins to define roles and permissions for various users.
+Admins have granular control over user privileges, ensuring a secure and well-organized platform.
+### Daily News is not just about delivering news; it's about providing a user-centric experience, empowering administrators to curate content effectively, and ensuring readers stay connected with the latest happenings in a seamlessly navigable environment. Stay informed with Daily News – where news meets innovation! 📰🌐
